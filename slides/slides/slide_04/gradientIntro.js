@@ -73,6 +73,7 @@ pt.gradientIntro.init = function() {
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapper = svg.append("g")
 		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)") //make it work in safari
 		.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")");
 
