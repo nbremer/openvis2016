@@ -52,6 +52,17 @@ pt.planetsIntro.update = function(planets) {
 		radiusSizer = 4; //Size increaser of radii of planets
 
 	///////////////////////////////////////////////////////////////////////////
+	/////////////////////// Calculate hexagon variables ///////////////////////
+	///////////////////////////////////////////////////////////////////////////	
+
+	var SQRT3 = Math.sqrt(3),
+		hexRadius = Math.min(width, height)/2,
+		hexWidth = SQRT3 * hexRadius,
+		hexHeight = 2 * hexRadius;
+	var hexagonPoly = [[0,-1],[SQRT3/2,0.5],[0,1],[-SQRT3/2,0.5],[-SQRT3/2,-0.5],[0,-1],[SQRT3/2,-0.5]];
+	var hexagonPath = "m" + hexagonPoly.map(function(p){ return [p[0]*hexRadius, p[1]*hexRadius].join(','); }).join('l') + "z";
+
+	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////// Create gradient /////////////////////////////
 	///////////////////////////////////////////////////////////////////////////	
 
@@ -65,6 +76,12 @@ pt.planetsIntro.update = function(planets) {
 	//A gradient is created for each planet and colored to the temperature of its star
 	var defsContainer = pt.planetsIntro.svg.append("defs");
 
+	//Create a clip path that is the same as the top hexagon
+	defsContainer.append("clipPath")
+	    .attr("id", "clip")
+	    .append("path")
+	    .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
+	
 	//Create pattern container for the galaxy background
 	defsContainer.append("pattern")
 		.attr("id","galaxy")
@@ -125,30 +142,14 @@ pt.planetsIntro.update = function(planets) {
 		.attr("stop-color", function(d) {return d3.rgb(colorScale(d.temp)).darker(1.75);});
 
 	///////////////////////////////////////////////////////////////////////////
-	/////////////////////// Calculate hexagon variables ///////////////////////
-	///////////////////////////////////////////////////////////////////////////	
-
-	var SQRT3 = Math.sqrt(3),
-		hexRadius = Math.min(width, height)/2,
-		hexWidth = SQRT3 * hexRadius,
-		hexHeight = 2 * hexRadius;
-	var hexagonPoly = [[0,-1],[SQRT3/2,0.5],[0,1],[-SQRT3/2,0.5],[-SQRT3/2,-0.5],[0,-1],[SQRT3/2,-0.5]];
-	var hexagonPath = "m" + hexagonPoly.map(function(p){ return [p[0]*hexRadius, p[1]*hexRadius].join(','); }).join('l') + "z";
-
-	///////////////////////////////////////////////////////////////////////////
 	////////////////////// Place circles inside hexagon ///////////////////////
 	///////////////////////////////////////////////////////////////////////////	
-
-	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
-        .attr("id", "clip")
-        .append("path")
-        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
 
     //First append a group for the clip path, then a new group that can be transformed
 	var planetOuterWrapper = svg.append("g")
 		.attr("class", "planetOuterWrapper")
-		.attr("clip-path", "url(#clip");
+		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)") //make it work in safari;
 		
 	var planetInnerWrapper = planetOuterWrapper.append("g")
 		.attr("class", "planetInnerWrapper")

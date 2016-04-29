@@ -61,9 +61,12 @@ pt.gooeyCode.init = function() {
 	pt.gooeyCode.xScale = d3.scale.linear()
 		.domain([-1.25, 1.25])
 		.range([-width/2, width/2]);
+		
+	var circleWrapper = svg.append("g")
+		.style("filter", "url(#gooeyCode)");
 
 	//Append circle at center
-	svg.append("circle")
+	circleWrapper.append("circle")
 			.attr("class", "centerCircle")
 			.attr("cx", 0)
 			.attr("cy", 0)
@@ -85,7 +88,7 @@ pt.gooeyCode.init = function() {
 	}//for i
 
 	//Set up the circles
-	pt.gooeyCode.flyCircles = svg.selectAll("#gooeyCode .flyCircle")
+	pt.gooeyCode.flyCircles = circleWrapper.selectAll("#gooeyCode .flyCircle")
 		.data(flyCircleData)
 		.enter().append("circle")
 		.attr("class", "flyCircle")

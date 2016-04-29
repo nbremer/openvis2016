@@ -36,20 +36,20 @@ pt.gooeyGolf.init = function() {
 
 	//SVG filter for the gooey effect
 	//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
-	var defs = pt.gooeyGolf.svg.append('defs');
-	var filter = defs.append('filter').attr('id','gooeyGolf');
-	filter.append('feGaussianBlur')
-		.attr('in','SourceGraphic')
-		.attr('stdDeviation','15')
-		.attr('result','blur');
-	filter.append('feColorMatrix')
-		.attr('in','blur')
-		.attr('mode','matrix')
-		.attr('values','1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -10')
-		.attr('result','goo');
-	filter.append('feBlend')
-		.attr('in','SourceGraphic')
-		.attr('in2','goo');
+	var defs = pt.gooeyGolf.svg.append("defs");
+	var filter = defs.append("filter").attr("id","gooeyGolf");
+	filter.append("feGaussianBlur")
+		.attr("in","SourceGraphic")
+		.attr("stdDeviation","10")
+		.attr("result","blur");
+	filter.append("feColorMatrix")
+		.attr("in","blur")
+		.attr("mode","matrix")
+		.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -10")
+		.attr("result","gooey");
+	// filter.append("feBlend")
+	// 	.attr("in","SourceGraphic")
+	// 	.attr("in2","goo");
 
  	///////////////////////////////////////////////////////////////////////////
 	//////////////////////////// Set-up Chart /////////////////////////////////
@@ -79,15 +79,6 @@ pt.gooeyGolf.init = function() {
 			.attr("cy", 0)
 			.attr("r", 0)
 			.style("fill", "#81BC00");
-
-	// //Append pulsating circle for previous strike
-	// pt.gooeyGolf.svg.append("circle")
-	// 		.attr("class", "pulseCircle")
-	// 		.attr("r", 0)
-	// 		.attr("cx", 0)
-	// 		.attr("cy", 0)
-	// 		.style("opacity", 0.4)
-	// 		.style("fill", "#81BC00");	
 
 }//init
 

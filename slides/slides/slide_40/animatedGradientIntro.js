@@ -49,7 +49,7 @@ pt.animatedGradientIntro.init = function() {
 		.attr("x1","0%")
 		.attr("y1","0%")
 		.attr("x2","100%")
-		.attr("y2","0")
+		.attr("y2","0%")
 		.attr("spreadMethod", "reflect");
 		
 	linearGradient.selectAll(".stop")
@@ -78,6 +78,12 @@ pt.animatedGradientIntro.init = function() {
 		.attr("dur","7s")
 		.attr("repeatCount","indefinite");
 
+	//Create a clip path that is the same as the top hexagon
+	defs.append("clipPath")
+        .attr("id", "clip")
+        .append("path")
+        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
+		
 	////////////////////////////////////////////////////////////
 	//////////////////// Chord variables ///////////////////////
 	////////////////////////////////////////////////////////////
@@ -134,24 +140,19 @@ pt.animatedGradientIntro.init = function() {
 	////////////////////// Place circles inside hexagon ///////////////////////
 	///////////////////////////////////////////////////////////////////////////	
 
-	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
-        .attr("id", "clip")
-        .append("path")
-        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
-
     //First append a group for the clip path, then a new group that can be transformed
 	var chordWrapper = svg.append("g")
 		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)") //make it work in safari
 		.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")");
 
-	// // chordWrapper.append("rect")
-	// // 	.attr("x", -hexWidth/2)
-	// // 	.attr("y", -hexHeight/2)
-	// // 	.attr("width", hexWidth)
-	// // 	.attr("height", hexHeight)
-	// // 	.style("fill", "url(#animatedGradientIntro)");
+	// chordWrapper.append("rect")
+	// 	.attr("x", -width/2)
+	// 	.attr("y", -height/2)
+	// 	.attr("width", width)
+	// 	.attr("height", height)
+	// 	.style("fill", "url(#animatedGradientIntro)");
 
 	var chords = chordWrapper.selectAll("path.chord")
 		.data(chord.chords)
@@ -163,32 +164,6 @@ pt.animatedGradientIntro.init = function() {
 		.style("opacity", function(d) { return (Names[d.source.index] === "" ? 0 : opacityDefault); }) //Make the dummy strokes have a zero opacity (invisible)
 		.attr("d", path);
 
-	// //Create dataset with random initial positions
-	// randStart = [];
-	// for(var i = 0; i < 50; i++) {
-	// 	randStart.push({
-	// 		rHex: Math.random() * hexWidth,
-	// 		theta: Math.random() * 2 * Math.PI,
-	// 		r: 4 + Math.random() * 30
-	// 	});
-	// }//for i
-
- //    var circle = chordWrapper.selectAll(".dots")
- //    	.data(randStart)
- //    	.enter().append("circle")
- //    	.attr("class", "dots")
- //    	.attr("cx", function(d) { return d.rHex * Math.cos(d.theta); })
- //    	.attr("cy", function(d) { return d.rHex * Math.sin(d.theta); })
- //      	.attr("r", 0)
- //      	.style("fill", "url(#animatedGradientIntro)")
-	// 	.style("opacity", 0.7)
-	// 	.each(move);
-
-	// circle.transition("grow")
-	// 	.duration(function(d,i) { return Math.random()*2000+500; })
-	// 	.delay(function(d,i) { return Math.random()*3000;})
-	// 	.attr("r", function(d,i) { return d.r; });
-		
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////// Place Hexagon in center /////////////////////////
 	///////////////////////////////////////////////////////////////////////////	

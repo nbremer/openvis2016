@@ -44,14 +44,15 @@ pt.colorAddIntro.init = function() {
 	///////////////////////////////////////////////////////////////////////////	
 
 	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
+	svg.append("defs").append("clipPath")
         .attr("id", "clip")
         .append("path")
         .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
 
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapperOuter = svg.append("g")
-		.attr("clip-path", "url(#clip");
+		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)"); //make it work in safari
 
 	var circleWrapperInner = circleWrapperOuter.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")")

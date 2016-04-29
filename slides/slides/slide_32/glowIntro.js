@@ -56,19 +56,21 @@ pt.glowIntro.init = function() {
 	//var colors = ["#FFE763", "#EC0080", "#00AC93"];	
 	var colors = ["#00A0B0","#EDC951","#CC333F"];
 	//var colors = ["#F04155", "#FF823A", "#F2F26F", "#FFF7BD","#95CFB7"];
+
+	//Create a clip path that is the same as the top hexagon
+	defs.append("clipPath")
+	    .attr("id", "clip")
+	    .append("path")
+	    .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
+	
 	///////////////////////////////////////////////////////////////////////////
 	////////////////////// Place circles inside hexagon ///////////////////////
 	///////////////////////////////////////////////////////////////////////////	
 
-	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
-        .attr("id", "clip")
-        .append("path")
-        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
-
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapper = svg.append("g")
 		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)") //make it work in safari
 		.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")");
 

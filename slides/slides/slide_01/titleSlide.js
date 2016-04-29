@@ -232,6 +232,7 @@ pt.titleSlide.slider = function(svg) {
 		.attr("r", function(d,i) { return d.r; });
 	
 	function moveGradient() {
+		//if(is_safari) return;
 
 		//Move the left side of the gradient
 		d3.selectAll("#titleSlide .left")
@@ -527,7 +528,7 @@ pt.titleSlide.planet = function(svg) {
 //General idea from Maarten Lambrecht's block: http://bl.ocks.org/maartenzam/f35baff17a0316ad4ff6
 pt.titleSlide.move = function() {
 
-	if(is_safari) return;
+	//if(is_safari) return;
 	
 	var SQRT3 = pt.titleSlide.SQRT3,
 		hexRadius = pt.titleSlide.hexRadius,

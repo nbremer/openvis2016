@@ -125,19 +125,20 @@ pt.sliderIntro.update = function() {
 	linearGradient.append("stop").attr("class", "left").attr("offset", 0.4).attr("stop-color", function(d) { return color(d.name); }).attr("stop-opacity", 1); 
 	linearGradient.append("stop").attr("class", "right").attr("offset", 0.6).attr("stop-color", function(d) { return color(d.name); }).attr("stop-opacity", 1); 
 	linearGradient.append("stop").attr("class", "right").attr("offset", 0.6).attr("stop-color", "#9E9E9E").attr("stop-opacity", 0.5); 
-	
+
+	//Create a clip path that is the same as the top hexagon
+	defs.append("clipPath")
+	    .attr("id", "clip")
+	    .append("path")
+	    .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);	
+			
 	////////////////////////////////////////////////////////////// 
 	////////////////////////// Chart ///////////////////////////// 
 	////////////////////////////////////////////////////////////// 
 
-	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
-        .attr("id", "clip")
-        .append("path")
-        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);		
-
 	var focusWrapper = svg.append("g")
-		.attr("clip-path", "url(#clip");
+		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)"); //make it work in safari
 
 	//Add the lines to focus chart 
 	focusWrapper.selectAll(".focus")

@@ -44,17 +44,17 @@ pt.gooeyIntro.init = function() {
 
 	//SVG filter for the gooey effect
 	//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
-	var defs = svg.append('defs');
-	var filter = defs.append('filter').attr('id','gooeyIntro');
-	filter.append('feGaussianBlur')
-		.attr('in','SourceGraphic')
-		.attr('stdDeviation','10')
-		.attr('result','blur');
-	filter.append('feColorMatrix')
-		.attr('in','blur')
-		.attr('mode','matrix')
-		.attr('values','1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7')
-		.attr('result','gooey');
+	var defs = svg.append("defs");
+	var filter = defs.append("filter").attr("id","gooeyIntro");
+	filter.append("feGaussianBlur")
+		.attr("in","SourceGraphic")
+		.attr("stdDeviation","10")
+		.attr("result","blur");
+	filter.append("feColorMatrix")
+		.attr("in","blur")
+		.attr("mode","matrix")
+		.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7")
+		.attr("result","gooey");
 	// filter.append('feComposite')
 	// 	.attr('in','SourceGraphic')
 	// 	.attr('in2','gooey')
@@ -74,19 +74,20 @@ pt.gooeyIntro.init = function() {
 		.attr("offset", function(d,i) { return (i/(colors.length-1)*100) + "%"; })   
 		.attr("stop-color", function(d) { return colors[d]; });
 
+	//Create a clip path that is the same as the top hexagon
+	defs.append("clipPath")
+        .attr("id", "clip")
+        .append("path")
+        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
+		
 	///////////////////////////////////////////////////////////////////////////
 	////////////////////// Place circles inside hexagon ///////////////////////
 	///////////////////////////////////////////////////////////////////////////	
 
-	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
-        .attr("id", "clip")
-        .append("path")
-        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
-
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapper = svg.append("g")
 		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)") //make it work in safari
 		.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")")
 		.style("filter", "url(#gooeyIntro)");

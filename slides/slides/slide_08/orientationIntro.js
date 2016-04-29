@@ -87,8 +87,10 @@ pt.orientationIntro.init = function() {
 	//Function to create the id for each chord gradient
 	function getGradID(d){ return "chordGrad-" + d.source.index + "-" + d.target.index; }
 
+	var defs = svg.append("defs");
+	
 	//Create the gradients definitions for each chord
-	var grads = svg.append("defs").selectAll("linearGradient")
+	var grads = defs.selectAll("linearGradient")
 		.data(chord.chords())
 	   .enter().append("linearGradient")
 		.attr("id", getGradID)
@@ -108,19 +110,20 @@ pt.orientationIntro.init = function() {
 		.attr("offset", "100%")
 		.attr("stop-color", function(d){ return colors(d.target.index); });
 
+	//Create a clip path that is the same as the top hexagon
+	defs.append("clipPath")
+        .attr("id", "clip")
+        .append("path")
+        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
+		
 	///////////////////////////////////////////////////////////////////////////
 	////////////////////// Place circles inside hexagon ///////////////////////
 	///////////////////////////////////////////////////////////////////////////	
 
-	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
-        .attr("id", "clip")
-        .append("path")
-        .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
-
     //First append a group for the clip path, then a new group that can be transformed
 	var arcWrapperOuter = svg.append("g")
-		.attr("clip-path", "url(#clip");
+		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)"); //make it work in safari
 
 	var arcWrapperInner = arcWrapperOuter.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ") rotate(4.2)");

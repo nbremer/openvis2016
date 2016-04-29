@@ -76,7 +76,7 @@ pt.endSlide.init = function() {
 	///////////////////////////////////////////////////////////////////////////	
 
 	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
+	svg.append("defs").append("clipPath")
         .attr("id", "clip")
         .append("path")
         .attr("d", "M0,0" + hexagonPath);
@@ -155,7 +155,8 @@ pt.endSlide.gradient = function(svg) {
 
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapper = svg.append("g")
-		.attr("clip-path", "url(#clip");
+		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)"); //make it work in safari
 
     var circle = circleWrapper.selectAll("#endSlide .dots")
     	.data(pt.endSlide.randStart)
@@ -203,7 +204,8 @@ pt.endSlide.gooey = function(svg) {
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapper = svg.append("g")
 		.style("filter", "url(#gooeyEnd)")
-		.attr("clip-path", "url(#clip");
+		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)"); //make it work in safari
 
 	// //Create dataset with random initial positions
 	// randStart = [];
@@ -243,7 +245,8 @@ pt.endSlide.colorAdd = function(svg) {
 
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapperOuter = svg.append("g")
-		.attr("clip-path", "url(#clip");
+		.attr("clip-path", "url(#clip")
+		.style("clip-path", "url(#clip)"); //make it work in safari
 
 	var circleWrapperInner = circleWrapperOuter.append("g")
 		.style("isolation", "isolate");
