@@ -1,0 +1,33 @@
+<style>
+</style>
+
+<section id="planets-code">
+
+<span class="fragment" data-fragment-index="1"></span>
+<span class="fragment" data-fragment-index="2"></span>
+<span class="fragment" data-fragment-index="3"></span>
+<span class="fragment" data-fragment-index="4"></span>
+<span class="fragment" data-fragment-index="5"></span>
+<span class="fragment" data-fragment-index="6"></span>
+<span class="fragment" data-fragment-index="7"></span>
+<span class="fragment" data-fragment-index="8"></span>
+
+<div id="planetsCode"></div>
+
+<pre><code class="language-javascript" data-noescape data-trim>
+var gradientRadial = defs.selectAll("radialGradient")
+	.data(planets).enter()
+	.append("radialGradient")
+	<span class="fragment" data-fragment-index="1">.attr("id", function(d,i){ return "gradient-radial-" + i; })</span>
+
+<span class="fragment" data-fragment-index="2">gradientRadial.append("stop")
+	.attr("stop-color", function(d) { return colorScale(d.feature); })</span>
+	<span class="fragment" data-fragment-index="3">//...set offset, opacity, more colors</span>
+
+<span class="fragment" data-fragment-index="8">d3.selectAll(".planet")
+	.style("fill", function(d,i){ return "url(#gradient-radial-" + i + ")"; });</span>
+</code></pre>
+
+<img class="fragment current-visible overall-image" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); max-width: 1330px;" data-fragment-index="7" src="slides/slide_16/devTools radialGradients Screenshot.png" />
+
+</section>

@@ -1,0 +1,111 @@
+<style>
+  #baby-names-final {
+    font-size: 11px;
+    font-weight: 400;
+    fill: #4A4A4A;
+  }
+
+  #baby-names-final td {
+    /*padding: 0 !important;*/
+    /*vertical-align: middle !important;*/
+    text-align: center;
+  }
+
+  #baby-names-final .topTitle {
+    font-size: 36px;
+    color: #4F4F4F;
+    font-weight: 300;
+    text-align: left;
+  }
+
+  #baby-names-final .subtitle {
+    font-size: 16px;
+    color: #AAAAAA;
+    font-weight: 300;
+    text-align: left;
+  }
+  
+  #baby-names-final .titles {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  #baby-names-final .legendTitle {
+    font-size: 14px;
+  }
+
+  #baby-names-final .strokeKeyText {
+    font-size: 12px;
+  }
+
+  #baby-names-final .popUpName text {
+    text-anchor: middle;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  }
+
+  #baby-names-final .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  #baby-names-final .axis path {
+    display: none;
+  }
+
+  #baby-names-final .tick text {
+    font-size: 12px;
+  }
+
+   #baby-names-final .x.axis text {
+    font-size: 14px;
+  }
+
+  #baby-names-final .line {
+    fill: none;
+    stroke-width: 1.5px;
+  }
+
+  #baby-names-final .brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+  }
+
+  #baby-names-final .resize {
+    display: inline !important; /* show when empty */
+    fill: #7A7A7A;
+    fill-opacity: 1;
+    stroke: #7A7A7A;
+    stroke-width: 3px;
+  }
+
+  #baby-names-final .voronoi path {
+    fill: none;
+    pointer-events: all;
+  }
+</style>
+
+<section id="baby-names-final">
+
+  <table>
+      <tr>
+        <td>
+          <div class="topTitle">The 10 most popular girl names</div>
+          <div class="subtitle">per year since 1880</div>
+        </td>
+
+        <td style="width: 30%;">
+            <span class="legendTitle">Color | Starting letter of the name</span>
+            <div id="babyNamesFinalColorLegend"></div>
+        </td>
+
+        <td style="width: 30%;">
+            <span class="legendTitle">Line thickness | Highest position ever reached</span>
+            <div id="babyNamesFinalWidthLegend"></div>
+        </td>
+    </tr>
+  </table>
+
+	<div id="babyNamesFinalFocus"></div>
+  <div id="babyNamesFinalContext"></div>
+</section>

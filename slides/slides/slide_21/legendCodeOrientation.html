@@ -1,0 +1,65 @@
+<style>
+	#legend-code-orientation td {
+		padding: 0 !important;
+		vertical-align: middle !important;
+	}
+
+	#legend-code-orientation pre {
+		width: 110%;
+	}
+
+	#legend-code-orientation .xyLine {
+		stroke-dasharray: 8, 6;
+		stroke: #BEBEBE;
+		/*shape-rendering: crispEdges;*/
+	}
+
+	#legend-code-orientation .xyTitle {
+		fill: #858585;
+		font-size: 20px;
+		font-weight: 300;
+	}
+
+	#legend-code-orientation .xyText {
+		fill: #BEBEBE;
+		font-size: 18px;
+		font-weight: 300;
+	}
+
+	#legend-code-orientation .xyPos {
+		text-anchor: middle;
+		fill: white;
+		font-size: 20px;
+		font-weight: 300;
+	}
+</style>
+
+<section id="legend-code-orientation">
+
+<span class="fragment"></span>
+<span class="fragment"></span>
+<span class="fragment"></span>
+<span class="fragment"></span>
+<span class="fragment"></span>
+
+	<table>
+		<tr>
+			<td style="width: 50%;">
+<pre><code class="language-javascript" data-noescape data-trim>
+var defs = svg.append("defs");
+
+var linearGradient = defs.append("linearGradient")
+    .attr("id", "linear-gradient");
+</code></pre>
+			</td>
+
+			<td id="legendCodeOrientationWrapper">
+				<div style="position: relative;">
+					<div id="legendCodeOrientation"></div>
+				</div>
+			</td>
+
+		</tr>
+	</table>
+
+</section>

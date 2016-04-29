@@ -1,0 +1,23 @@
+<style>
+</style>
+
+<section id="legend-code-multi">
+	<div id="legendCodeMulti"></div>
+
+<pre><code class="language-javascript" data-noescape data-trim>
+linearGradient<span class="fragment" data-fragment-index="1">.selectAll("stop") 
+    .data([                             
+        {offset: "0%", color: "#2c7bb6"}, 
+        {offset: "12.5%", color: "#00a6ca"},  
+        //...more colors      
+        {offset: "87.5%", color: "#e76818"},        
+        {offset: "100%", color: "#d7191c"}    
+      ])                  
+    .enter().append("stop")</span>
+    <span class="fragment" data-fragment-index="2">.attr("offset", function(d) { return d.offset; })   
+    .attr("stop-color", function(d) { return d.color; });
+
+d3.select("#legend-rectangle")
+    .style("fill", "url(#linear-gradient)");</span>
+</code></pre>
+</section>

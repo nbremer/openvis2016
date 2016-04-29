@@ -1,0 +1,80 @@
+<style>
+  	#growth-bmi .title {
+    	font-size: 36px;
+    	fill: #4F4F4F;
+    	font-weight: 300;
+  	}
+
+  	#growth-bmi .subtitle {
+    	font-size: 22px;
+    	fill: #AAAAAA;
+    	font-weight: 300;
+  	}
+  
+  	#growth-bmi .credit {
+    	font-size: 14px;
+    	fill: #AAAAAA;
+    	font-weight: 400;
+  	}
+
+	#growth-bmi .axis path,
+	#growth-bmi .axis line {
+	  fill: none;
+	  stroke: #9C9C9C;
+	  shape-rendering: crispEdges;
+	}
+
+	#growth-bmi .x.axis path {
+	  display: none;
+	}
+
+	#growth-bmi .axis text {
+		fill: #9C9C9C;
+		font-size: 16px;
+		font-weight: 300;
+	}
+
+	#growth-bmi .line {
+	  fill: none;
+	  stroke-width: 1.5px;
+	  opacity: 0.5;
+	  pointer-events: none;
+	}
+
+	#growth-bmi .axisLegend {
+		text-anchor: middle;
+		font-size: 22px;
+		font-weight: 300;
+		opacity: 1;
+	}
+
+	#growth-bmi .countryName {
+		text-anchor: start;
+		font-size: 16px;
+		font-weight: 300;
+		fill: #383838;
+		opacity: 0;
+	}
+
+	#growth-bmi .threshold {
+		fill: none;
+	  	shape-rendering: crispEdges;
+	  	opacity: 0.3;
+	  	stroke-dasharray: 8, 5;
+	  	/*stroke-width: 1.5px;*/
+	  	pointer-events: none;
+	}
+
+	#growth-bmi .voronoiWrapper path {
+    	fill: none;
+    	pointer-events: all;
+  	}	
+
+
+</style>
+
+<section id="growth-bmi">
+	<div id="growthBMI"></div>
+	<span class="fragment"></span>
+</section>
+

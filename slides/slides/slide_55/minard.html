@@ -1,0 +1,392 @@
+<style>
+	#minard #rivers{
+		font-family: "Cardo";
+		font-size: 11px;
+		font-style: italic; 
+		font-weight: 400; 
+	}
+</style>
+
+<section id="minard">
+
+<div id="minard-chart">
+	<svg id="svgMinard" width="1920px" height="1080px" viewBox="0 0 1920 1080">
+	    <g id="minard-map">
+	        <path d="M138.546273,812.345673 L138.546273,481.499997" id="start-line" stroke="#000000"></path>
+	        <g id="temperature-vertical-lines" transform="translate(333.594934, 381.259757)" stroke="#ACACAC">
+	            <path d="M1488.92082,517.15395 L1488.92082,0.745745723" id="path3292"></path>
+	            <path d="M1010.45659,436.638692 L1010.45659,91.4410934" id="path3294"></path>
+	            <path d="M842.022375,478.284515 L842.022375,146.043395" id="path3296"></path>
+	            <path d="M516.259493,439.41508 L516.259493,248.769758" id="path3298"></path>
+	            <path d="M400.576652,472.731739 L400.576652,256.17346" id="path3300"></path>
+	            <path d="M295.073901,489.390068 L295.073901,197.869308" id="path3302"></path>
+	            <path d="M218.260494,509.750248 L218.260494,229.33504" id="path3304"></path>
+	            <path d="M0.776752126,494.942844 L0.776752126,205.273009" id="path3306"></path>
+	        </g>
+	        <path d="M856.795398,616.610305 L996.077539,556.455228 L1179.31916,519.89945 L1349.14157,456.505253 L1469.91446,383.856428 L1596.70285,325.552276 L1774.85443,369.511756 L1788.73637,363.033517 L1797.991,241.335168 L1828.994,221.437719 L1847.96598,256.142571 L1831.30765,263.546273 L1822.05303,382.930965 L1777.63082,404.67934 L1594.38919,360.257129 L1475.0045,415.784892 L1469.45173,408.843922 L1350.9925,478.716358 L1346.82791,474.089045 L1180.24462,534.244122 L1179.31916,530.542271 L997.465733,568.023512 L995.614807,565.247124 L859.571786,625.864932 L860.95998,630.954977 L769.801901,658.256128 L744.351676,655.47974 L744.814407,645.762381 L629.594297,579.591796 L562.035518,617.073037 L496.327664,597.175588 L363.061031,589.309155 L338.536268,587.92096 L272.828414,592.085543 L272.365683,588.846423 L211.285143,591.622811 L211.747874,594.861931 L166.4002,595.787394 L165.937469,590.697349 L207.583292,589.309155 L211.747874,588.383692 L338.998999,582.830915 L498.178589,592.085543 L561.110055,611.057529 L631.445223,571.262631 L742.038019,636.045023 L767.950975,639.284142" id="path-group-1-back" fill="#000000"></path>
+	        <path d="M846.748602,619.531235 L803.581291,466.685343 L769.801901,362.570785 L780.444722,362.570785 L813.761381,466.222611 L856.408209,617.561905" id="path-group-2-back" fill="#000000"></path>
+	        <path d="M208.112607,589.567881 L212.206386,588.718742 L231.368792,287.507727 L227.275012,287.507727 L208.112607,589.567881 Z" id="path-group-3-back" fill="#000000"></path>
+	        <path d="M118.893116,443.857266 L236.426883,409.152414 L240.591465,291.155916 L251.697018,291.155916 L247.995167,422.571623 L364.603469,439.692684 L512.677506,321.696186 L779.210775,353.62465 L781.524432,365.192934 L622.344842,348.997336 L621.419379,352.699187 L523.783059,340.20544 L377.559947,455.888282 L467.329832,431.826251 L469.180757,435.990833 L554.323331,411.466071 L555.711526,415.630653 L637.152246,392.494085 L657.512426,391.105891 L657.512426,395.270473 L752.372356,386.015846 L752.372356,390.643159 L826.409374,382.776726 L826.409374,387.866771 L912.477408,378.612144 L912.94014,381.851263 L942.554947,378.612144 L1148.4704,455.42555 L1334.02568,390.180428 L1501.53451,233.314495 L1613.05277,264.780228 L1610.73911,271.258467 L1638.04026,280.050363 L1813.87818,193.519597 L1831.46197,224.522599 L1639.89119,322.158917 L1518.19284,288.379527 L1344.20577,452.649162 L1153.09772,522.521598 L933.763051,442.469072 L920.806573,443.857266 L920.806573,449.410043 L837.052196,458.201939 L837.514927,463.291984 L762.089715,472.08388 L763.015177,479.02485 L668.617979,488.279477 L668.155247,493.832254 L652.422381,494.757717 L586.251796,514.192434 L586.714527,518.357016 L497.870102,542.881779 L499.258296,547.971824 L368.30532,584.06487 L243.830585,566.481078 L167.47991,589.154915 L118.893116,443.857266 Z" id="path-forward" fill="#E6CDAB"></path>
+	        <g id="rivers" transform="translate(47.594934, 173.259757)" fill="none">
+	            <g id="niemenWrapper" transform="translate(0.000000, 243.000000)">
+	                <path d="M0.808768134,13.8698059 C12.7156328,24.2859907 22.8916046,6.32058429 32.9503479,1.79226738 C54.7483732,-5.11261006 32.2616463,22.1459877 57.2950338,20.668903 C70.7453759,15.4554012 77.8733177,21.7093637 84.7482379,31.2011316 C89.2265613,37.3840648 83.0700963,48.6388392 96.8329487,63.8706601 C104.797083,72.6848504 102.199938,86.5224987 96.1716501,96.9800333 C85.8732581,105.312567 101.979577,119.820463 113.184061,122.132805 C125.331722,125.827567 121.034197,143.995252 121.787764,155.282149 C124.647592,165.198103 131.923219,173.970009 131.636363,184.95552 C135.280298,202.1825 119.877942,199.972069 122.788615,212.801888 C128.765929,225.834097 128.957343,234.811151 119.227907,243.972649 C108.953253,254.129158 129.476666,257.050566 134.174519,268.5384 C139.104421,278.914688 132.544464,289.59686 124.76197,296.819597 C121.589262,302.913389 122.682058,304.18703 122.969849,308.783933" id="path3822" stroke="#515151" stroke-width="1.5"></path>
+	                <text id="NiemenR" transform="translate(116.188894, 219.206344) rotate(-79.000000) translate(-116.188894, -219.206344) " font-family="Cardo-Italic, Cardo" font-size="11" font-style="italic" font-weight="normal" fill="#000000">
+	                    <tspan x="86.1263937" y="223.206344">Niémen     R.</tspan>
+	                </text>
+	                <path d="M0.808768134,13.8698059 C12.7156328,24.2859907 22.8916046,6.32058429 32.9503479,1.79226738 C54.7483732,-5.11261006 32.2616463,22.1459877 57.2950338,20.668903 C70.7453759,15.4554012 77.8733177,21.7093637 84.7482379,31.2011316" id="niemen"></path>
+	            </g>
+	            <g id="berezinaWrapper" transform="translate(626.000000, 376.000000)">
+	                <path d="M0.421574537,0.562982741 C3.74347674,1.86601576 1.0688987,7.80848599 6.52691696,7.27997274 C12.3325298,8.17525613 15.1282416,12.3116488 18.3792904,15.989086 C26.1131233,14.5256888 29.7525055,21.4212191 35.7160948,24.2232889 C41.755461,25.0508562 47.975533,24.4337114 54.098413,24.6250138 C60.2778572,29.7063132 50.8067826,32.5161661 64.6551016,36.0973274 C69.9667764,42.1461703 64.5046213,51.1219927 65.2330715,58.3763804 C66.4359417,64.6533037 72.8873609,71.593034 71.5265513,76.0208919 C69.6494075,82.9827594 68.7081193,89.5906096 70.6461678,97.217061 C72.3582924,104.308206 66.5393159,116.11315 78.7052176,119.798676 C84.8649865,124.418623 72.4755115,136.242547 82.0231311,138.10927 C94.5924142,137.678023 87.4845088,151.738717 89.5010828,152.219736 C93.5338329,156.767552 94.5401718,164.824066 94.8190508,170.757643 L94.8190508,173.316029" id="path3827" stroke="#515151" stroke-width="1.5"></path>
+	                <path d="M0.421574537,0.562982741 C3.74347674,1.86601576 -0.0822869806,0.678058771 7.41956038,4.64171666 C14.9214077,8.60537455 12.6351613,8.67411727 22.0187292,11.974003 C31.402297,15.2738888 29.6197633,17.6379129 38.432538,19.6416284 C47.2453126,21.645344 45.7173366,20.2735869 54.098413,24.6250138 C62.4794893,28.9764406 57.3043184,24.6250135 64.6551016,36.0973274" id="berezina"></path>
+	            </g>
+	            <g id="moskowaWrapper" transform="translate(1465.000000, 0.000000)">
+	                <path d="M1.74178089,1.44209205 C3.91004752,9.42952026 13.9930565,7.61948174 16.741033,14.7918549 C25.9079265,16.9563457 24.9099075,27.0969277 28.8871761,33.2756686 C34.1189095,36.5564987 39.6260605,42.1621283 41.7677664,48.8562779 C44.4079265,54.4093782 48.4816283,56.5474377 52.1653402,61.3047974 C57.6022486,59.6096551 56.5762806,67.2715425 62.3839295,64.9942471 C67.1449725,63.1273482 76.3753527,62.1334937 80.7145698,66.5329677 C85.5374337,66.8820338 92.7723312,61.2124362 95.5066108,69.1905728 C98.8075513,74.07796 101.273354,80.5583554 104.691921,84.9559877 C107.628969,88.6586438 103.633654,94.4332629 109.095458,101.392067" id="path3835" stroke="#515151" stroke-width="1.5"></path>
+	                <path d="M1.74178089,1.44209205 C-3.15676326,-2.78210495 10.209557,3.42393997 17.652084,12.1518384 C25.094611,20.8797368 25.8334835,22.3076686 31.6739956,30.8477203 C37.5145077,39.3877719 39.1807865,40.7658855 43.9557206,47.2066184 C48.7306546,53.6473513 48.4816283,56.5474377 52.1653402,61.3047974 C57.6022486,59.6096551 56.5762806,67.2715425 62.3839295,64.9942471 C67.1449725,63.1273482 76.3753527,62.1334937 80.7145698,66.5329677" id="moskowa"></path>
+	            </g>
+	            <path d="M1020.05169,345.09725 C1013.73055,350.811788 1003.58264,358.872753 992.518806,353.670764 C983.347849,358.98678 969.311689,350.177661 964.145192,361.247824 C957.983628,370.567206 944.209827,378.130356 950.146578,392.187283 C950.938987,402.550809 936.7348,409.777951 944.166525,421.160893 C949.093892,428.547733 936.587447,434.29804 954.071058,438.551365 C958.088353,444.632284 959.143926,447.438176 960.767799,451.932242 C961.55074,454.099019 958.272881,459.086337 959.471633,461.737612 C962.919139,469.362444 954.921049,473.237939 954.46562,475.153055 C952.342025,484.082919 951.402958,484.043966 946.982717,487.349108 C941.754389,496.502249 939.573212,510.248573 942.292157,520.126342 C944.707254,528.511192 949.641599,534.622827 950.950537,543.763253" id="path3831" stroke="#515151" stroke-width="1.5"></path>
+	        </g>
+	        <g id="temperature-horizontal-lines" transform="translate(41.594934, 784.259757)" stroke="#A2A2A2">
+	            <path d="M0.110176338,0.98308079 L1780.83267,0.98308079" id="path4147" stroke-width="1.5"></path>
+	            <path d="M510.965604,33.3742764 L1780.36994,33.3742764" id="path3286"></path>
+	            <path d="M510.040141,69.4673229 L1780.83267,69.4673229" id="path3288"></path>
+	            <path d="M510.965604,106.485832 L1779.90721,106.485832" id="path3290"></path>
+	        </g>
+	        <path d="M334.371686,877.128062 L551.855428,891.010003 L628.668834,870.649823 L733.246123,853.991494 L849.854427,820.674836 L1174.69185,858.618808 L1344.05153,816.972985 L1691.1001,784.581789 L1822.5158,785.507252 L1822.5158,785.507252 L1822.5158,785.507252" id="degree-line" stroke="#000000" stroke-width="3" fill="none"></path>
+	        <g id="legend" transform="translate(41.000000, 609.000000)">
+	            <g id="axis" transform="translate(0.594934, 23.259757)">
+	                <path d="M1335.40507,6.5 L1565.40507,6.5" id="path4115" stroke="#000000"></path>
+	                <path d="M1335.5,6.48194222 L1335.5,0.240026102" id="path4117" stroke="#000000"></path>
+	                <path d="M1359,6.31175888 L1359,2.64181791" id="path4119" stroke="#000000"></path>
+	                <path d="M1382,6.43052351 L1382,2.83150075" id="path4121" stroke="#000000"></path>
+	                <path d="M1404.5,6.48194222 L1404.5,2.17606256" id="path4123" stroke="#000000"></path>
+	                <path d="M1428,6.48194222 L1428,2.7800913" id="path4125" stroke="#000000"></path>
+	                <path d="M1452,6.40483267 L1452,1.00630315" id="path4127" stroke="#000000"></path>
+	                <path d="M1565.40507,6.74024297 L1565.40507,0.740242971" id="path4129" stroke="#000000"></path>
+	                <path d="M0.110176338,97 L1848.39145,97" id="path4145" stroke="#ACACAC" stroke-width="4"></path>
+	            </g>
+	            <g id="axis-text" transform="translate(1337.000000, 30.000000)" font-size="10" font-family="BaskOldFace, Baskerville Old Face" fill="#000000" font-weight="normal">
+	                <text id="0">
+	                    <tspan x="0" y="10">0</tspan>
+	                </text>
+	                <text id="5">
+	                    <tspan x="20" y="10">5</tspan>
+	                </text>
+	                <text id="10">
+	                    <tspan x="41" y="10">10</tspan>
+	                </text>
+	                <text id="15">
+	                    <tspan x="64" y="10">15</tspan>
+	                </text>
+	                <text id="20">
+	                    <tspan x="87" y="10">20</tspan>
+	                </text>
+	                <text id="25">
+	                    <tspan x="110" y="10">25</tspan>
+	                </text>
+	                <text id="50.">
+	                    <tspan x="223" y="10">50.</tspan>
+	                </text>
+	            </g>
+	            <text id="Lieues-communes-de-F" font-family="Cardo-Italic, Cardo" font-size="11" font-style="italic" font-weight="normal" fill="#000000">
+	                <tspan x="1326" y="11">Lieues communes de France (Carte de Mr. de Frezensac)</tspan>
+	            </text>
+	        </g>
+	        <g id="troup-numbers" transform="translate(156.594934, 167.259757)" font-size="13" font-family="BaskOldFace, Baskerville Old Face" fill="#000000" font-weight="normal">
+	            <text id="100.000" transform="translate(1605.003388, 22.531047) rotate(-296.000000) translate(-1605.003388, -22.531047) ">
+	                <tspan x="1584.00339" y="27.5310474">100.000</tspan>
+	            </text>
+	            <text id="100.000" transform="translate(1693.801213, 114.121887) rotate(-296.000000) translate(-1693.801213, -114.121887) ">
+	                <tspan x="1672.80121" y="119.121887">100.000</tspan>
+	            </text>
+	            <text id="100.000" transform="translate(1479.247792, 85.051828) rotate(-76.000000) translate(-1479.247792, -85.051828) ">
+	                <tspan x="1458.24779" y="90.0518284">100.000</tspan>
+	            </text>
+	            <text id="96.000" transform="translate(1583.522026, 250.140941) rotate(-76.000000) translate(-1583.522026, -250.140941) ">
+	                <tspan x="1565.52203" y="255.140941">96.000</tspan>
+	            </text>
+	            <text id="87.000" transform="translate(1385.565456, 242.426405) rotate(-112.000000) translate(-1385.565456, -242.426405) ">
+	                <tspan x="1367.56546" y="247.426405">87.000</tspan>
+	            </text>
+	            <text id="55.000" transform="translate(1262.565456, 297.426405) rotate(-112.000000) translate(-1262.565456, -297.426405) ">
+	                <tspan x="1244.56546" y="302.426405">55.000</tspan>
+	            </text>
+	            <text id="37.000" transform="translate(1111.565456, 359.426405) rotate(-112.000000) translate(-1111.565456, -359.426405) ">
+	                <tspan x="1093.56546" y="364.426405">37.000</tspan>
+	            </text>
+	            <text id="145.000" transform="translate(1028.689276, 249.207957) rotate(-112.000000) translate(-1028.689276, -249.207957) ">
+	                <tspan x="1007.68928" y="254.207957">145.000</tspan>
+	            </text>
+	            <text id="175.000" transform="translate(835.530512, 201.153653) rotate(-69.000000) translate(-835.530512, -201.153653) ">
+	                <tspan x="814.530512" y="206.153653">175.000</tspan>
+	            </text>
+	            <text id="30.000" transform="translate(640.675017, 361.307834) rotate(-12.000000) translate(-640.675017, -361.307834) ">
+	                <tspan x="622.675017" y="366.307834">30.000</tspan>
+	            </text>
+	            <text id="33.000" transform="translate(480.943427, 145.368993) rotate(-85.000000) translate(-480.943427, -145.368993) ">
+	                <tspan x="462.943427" y="150.368993">33.000</tspan>
+	            </text>
+	            <text id="400.000" transform="translate(128.398082, 234.740243) rotate(-90.000000) translate(-128.398082, -234.740243) ">
+	                <tspan x="107.398082" y="239.740243">400.000</tspan>
+	            </text>
+	            <text id="422.000" transform="translate(12.905066, 236.740243) rotate(-104.000000) translate(-12.905066, -236.740243) ">
+	                <tspan x="-8.09493372" y="241.740243">422.000</tspan>
+	            </text>
+	            <text id="6.000">
+	                <tspan x="37.4050663" y="150.740243">6.000</tspan>
+	            </text>
+	            <text id="22.000">
+	                <tspan x="99.4050663" y="139.740243">22.000</tspan>
+	            </text>
+	            <text id="60.000" transform="translate(328.405066, 233.360596) rotate(-313.000000) translate(-328.405066, -233.360596) ">
+	                <tspan x="310.405066" y="238.360596">60.000</tspan>
+	            </text>
+	            <text id="24.000" transform="translate(929.565456, 405.426405) rotate(-112.000000) translate(-929.565456, -405.426405) ">
+	                <tspan x="911.565456" y="410.426405">24.000</tspan>
+	            </text>
+	            <text id="20.000" transform="translate(760.565456, 458.426405) rotate(-112.000000) translate(-760.565456, -458.426405) ">
+	                <tspan x="742.565456" y="463.426405">20.000</tspan>
+	            </text>
+	            <text id="50.000" transform="translate(660.318195, 499.292702) rotate(-107.000000) translate(-660.318195, -499.292702) ">
+	                <tspan x="642.318195" y="504.292702">50.000</tspan>
+	            </text>
+	            <text id="12.000" transform="translate(359.405066, 460.740243) rotate(-90.000000) translate(-359.405066, -460.740243) ">
+	                <tspan x="341.405066" y="465.740243">12.000</tspan>
+	            </text>
+	            <text id="14.000" transform="translate(254.405066, 446.740243) rotate(-90.000000) translate(-254.405066, -446.740243) ">
+	                <tspan x="236.405066" y="451.740243">14.000</tspan>
+	            </text>
+	            <text id="8.000" transform="translate(190.905066, 440.740243) rotate(-90.000000) translate(-190.905066, -440.740243) ">
+	                <tspan x="176.405066" y="445.740243">8.000</tspan>
+	            </text>
+	            <text id="4.000" transform="translate(76.905066, 441.240243) rotate(-90.000000) translate(-76.905066, -441.240243) ">
+	                <tspan x="62.4050663" y="446.240243">4.000</tspan>
+	            </text>
+	            <text id="10.000" transform="translate(32.905066, 448.240243) rotate(-90.000000) translate(-32.905066, -448.240243) ">
+	                <tspan x="14.9050663" y="453.240243">10.000</tspan>
+	            </text>
+	            <text id="28.000" transform="translate(517.333270, 463.328700) rotate(-56.000000) translate(-517.333270, -463.328700) ">
+	                <tspan x="499.33327" y="468.3287">28.000</tspan>
+	            </text>
+	            <text id="127.000" transform="translate(1364.247792, 47.051828) rotate(-76.000000) translate(-1364.247792, -47.051828) ">
+	                <tspan x="1343.24779" y="52.0518284">127.000</tspan>
+	            </text>
+	        </g>
+	        <g id="cities" transform="translate(159.594934, 255.259757)" font-weight="normal" font-size="15" font-family="Cardo-Italic, Cardo" fill="#000000" font-style="italic">
+	            <text id="Kowno">
+	                <tspan x="0.77103308" y="259.740243">Kowno</tspan>
+	            </text>
+	            <text id="Wilna">
+	                <tspan x="169.405066" y="249.740243">Wilna</tspan>
+	            </text>
+	            <text id="Minsk">
+	                <tspan x="469.405066" y="454.740243">Minsk</tspan>
+	            </text>
+	            <text id="Orscha">
+	                <tspan x="818.405066" y="291.740243">Orscha</tspan>
+	            </text>
+	            <text id="Smolensk">
+	                <tspan x="976.405066" y="243.740243">Smolensk</tspan>
+	            </text>
+	            <text id="Dorogobouge">
+	                <tspan x="1122.40507" y="173.740243">Dorogobouge</tspan>
+	            </text>
+	            <text id="Wiszma">
+	                <tspan x="1299.40507" y="175.740243">Wiszma</tspan>
+	            </text>
+	            <text id="Chjat">
+	                <tspan x="1324.40507" y="15.740243">Chjat</tspan>
+	            </text>
+	            <text id="Mojaisk">
+	                <tspan x="1478.40507" y="76.740243">Mojaisk</tspan>
+	            </text>
+	            <text id="Tarantino">
+	                <tspan x="1669.40507" y="77.740243">Tarantino</tspan>
+	            </text>
+	            <text id="Malo-jarosewli">
+	                <tspan x="1631.40507" y="156.740243">Malo-jarosewli</tspan>
+	            </text>
+	            <text id="Witebesk">
+	                <tspan x="751.405066" y="143.740243">Witebesk</tspan>
+	            </text>
+	            <text id="Polotzk">
+	                <tspan x="583.405066" y="88.740243">Polotzk</tspan>
+	            </text>
+	            <text id="Botr">
+	                <tspan x="704.405066" y="381.740243">Botr</tspan>
+	            </text>
+	            <text id="Mohilow">
+	                <tspan x="830.405066" y="437.740243">Mohilow</tspan>
+	            </text>
+	            <text id="Studienska">
+	                <tspan x="547.405066" y="417.740243">Studienska</tspan>
+	            </text>
+	            <text id="Gloubokoe">
+	                <tspan x="440.405066" y="126.740243">Gloubokoe</tspan>
+	            </text>
+	            <text id="Molodezno">
+	                <tspan x="375.405066" y="373.740243">Molodezno</tspan>
+	            </text>
+	            <text id="Smorgoni">
+	                <tspan x="336.405066" y="331.740243">Smorgoni</tspan>
+	            </text>
+	        </g>
+	        <text id="MOSCOU" font-family="Cardo-Bold, Cardo" font-size="15" font-weight="bold" fill="#000000">
+	            <tspan x="1775" y="185">MOSCOU</tspan>
+	        </text>
+	        <g id="degree-axis-lines" transform="translate(1816.000000, 800.000000)" stroke="#000000">
+	            <path d="M0.963027764,0.259757029 L10.2176551,0.259757029" id="path4240"></path>
+	            <path d="M1.42575913,36.259757 L10.6803864,36.259757" id="path4242"></path>
+	            <path d="M1.42575913,72.259757 L10.6803864,72.259757" id="path4244"></path>
+	        </g>
+	        <g id="degrees" transform="translate(305.000000, 773.000000)" font-family="BaskOldFace, Baskerville Old Face" font-weight="normal">
+	            <g id="Degree-axis" transform="translate(1523.000000, 19.000000)" font-size="10" fill="#000000">
+	                <text id="degrés">
+	                    <tspan x="13" y="99">degrés</tspan>
+	                </text>
+	                <text id="30">
+	                    <tspan x="0" y="99">30</tspan>
+	                </text>
+	                <text id="25">
+	                    <tspan x="0" y="80">25</tspan>
+	                </text>
+	                <text id="20">
+	                    <tspan x="0" y="62">20</tspan>
+	                </text>
+	                <text id="15">
+	                    <tspan x="0" y="44">15</tspan>
+	                </text>
+	                <text id="10">
+	                    <tspan x="0" y="28">10</tspan>
+	                </text>
+	                <text id="5">
+	                    <tspan x="0" y="10">5</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(1520.000000, 0.000000)" fill="#000000">
+	                <text id="Zéro-le-18-8." font-size="11">
+	                    <tspan x="0" y="15">Zéro le 18 8.</tspan>
+	                </text>
+	                <text id="bre" font-size="8">
+	                    <tspan x="53" y="8">bre</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(1364.000000, 14.000000)" fill="#000000">
+	                <text id="Pluie-24-8." font-size="11">
+	                    <tspan x="0" y="15">Pluie 24 8.</tspan>
+	                </text>
+	                <text id="bre" font-size="8">
+	                    <tspan x="45" y="8">bre</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(1020.000000, 50.000000)">
+	                <text id="-9.-le-9-9." font-size="11">
+	                    <tspan x="0" y="15" fill="#000000">-9.</tspan>
+	                    <tspan x="10.8549805" y="15" fill="#2E3033"> </tspan>
+	                    <tspan x="13.6049805" y="15" fill="#000000">le 9 9.</tspan>
+	                </text>
+	                <text id="°" font-size="16" fill="#2E3033">
+	                    <tspan x="8" y="15">°</tspan>
+	                </text>
+	                <text id="bre" font-size="8" fill="#000000">
+	                    <tspan x="38" y="8">bre</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(841.000000, 87.000000)">
+	                <text id="-21.-le-14-9." font-size="11">
+	                    <tspan x="0" y="15" fill="#000000">-21.</tspan>
+	                    <tspan x="16.2636719" y="15" fill="#2E3033"> </tspan>
+	                    <tspan x="19.0136719" y="15" fill="#000000">le 14 9.</tspan>
+	                </text>
+	                <text id="°" font-size="16" fill="#2E3033">
+	                    <tspan x="13" y="15">°</tspan>
+	                </text>
+	                <text id="bre" font-size="8" fill="#000000">
+	                    <tspan x="48" y="8">bre</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(537.000000, 51.000000)">
+	                <text id="-11." font-size="11" fill="#000000">
+	                    <tspan x="0" y="15">-11.</tspan>
+	                </text>
+	                <text id="°" font-size="16" fill="#2E3033">
+	                    <tspan x="13" y="15">°</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(400.000000, 84.000000)">
+	                <text id="-20.-le-28-9." font-size="11">
+	                    <tspan x="0" y="15" fill="#000000">-20.</tspan>
+	                    <tspan x="16.2636719" y="15" fill="#2E3033"> </tspan>
+	                    <tspan x="19.0136719" y="15" fill="#000000">le 28 9.</tspan>
+	                </text>
+	                <text id="°" font-size="16" fill="#2E3033">
+	                    <tspan x="13" y="15">°</tspan>
+	                </text>
+	                <text id="bre" font-size="8" fill="#000000">
+	                    <tspan x="48" y="8">bre</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(300.000000, 99.000000)">
+	                <text id="-24.-le-1.--X." font-size="11">
+	                    <tspan x="0" y="15" fill="#000000">-24.</tspan>
+	                    <tspan x="16.2636719" y="15" fill="#2E3033"> </tspan>
+	                    <tspan x="19.0136719" y="15" fill="#000000">le 1.  X.</tspan>
+	                </text>
+	                <text id="°" font-size="16" fill="#2E3033">
+	                    <tspan x="13" y="15">°</tspan>
+	                </text>
+	                <text id="bre" font-size="8" fill="#000000">
+	                    <tspan x="52" y="8">bre</tspan>
+	                </text>
+	                <text id="er" font-size="8" fill="#000000">
+	                    <tspan x="34" y="8">er</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(221.000000, 122.000000)">
+	                <text id="-30.-le-6-X." font-size="11">
+	                    <tspan x="0" y="15" fill="#000000">-30.</tspan>
+	                    <tspan x="16.2636719" y="15" fill="#2E3033"> </tspan>
+	                    <tspan x="19.0136719" y="15" fill="#000000">le 6 X.</tspan>
+	                </text>
+	                <text id="°" font-size="16" fill="#2E3033">
+	                    <tspan x="13" y="15">°</tspan>
+	                </text>
+	                <text id="bre" font-size="8" fill="#000000">
+	                    <tspan x="46" y="8">bre</tspan>
+	                </text>
+	            </g>
+	            <g id="Degree" transform="translate(0.000000, 108.000000)">
+	                <text id="-26.-le-7-X." font-size="11">
+	                    <tspan x="0" y="15" fill="#000000">-26.</tspan>
+	                    <tspan x="16.2636719" y="15" fill="#2E3033"> </tspan>
+	                    <tspan x="19.0136719" y="15" fill="#000000">le 7 X.</tspan>
+	                </text>
+	                <text id="°" font-size="16" fill="#2E3033">
+	                    <tspan x="13" y="15">°</tspan>
+	                </text>
+	                <text id="bre" font-size="8" fill="#000000">
+	                    <tspan x="46" y="8">bre</tspan>
+	                </text>
+	            </g>
+	        </g>
+	        <g id="titles" transform="translate(55.594934, 746.259757)" font-weight="normal" font-family="Cardo" font-weight="400" fill="#000000" font-style="italic">
+	            <text id="Les-Cosaques-passant" font-size="16">
+	                <tspan x="14.4050663" y="76.740243">Les Cosaques passant au galop</tspan>
+	            </text>
+	            <text id="de-la-température-en" font-size="21">
+	                <tspan x="559.405066" y="21.740243">de la température en degrés du thermomètre de <tspan style="font-style: normal;">Réaumur</tspan> au dessous de zéro. </tspan>
+	            </text>
+	            <text id="le-Niémen-gelé." font-size="16">
+	                <tspan x="0.405066283" y="95.740243">le Niémen gelé.</tspan>
+	            </text>
+	            <text id="TABLEAU-GRAPHIQUE" font-size="21">
+	                <tspan x="300.405066" y="21.740243">TABLEAU GRAPHIQUE</tspan>
+	            </text>
+	        </g>
+	        <text id="credit" font-family="Cardo" font-size="13" fill="#000000" style="font-style: normal; font-weight: 400;">
+                <tspan x="781.677007" y="1035">Painstakingly adjusted from Wikipedia’s version (by Martin Grandjean)</tspan>
+            </text>
+	    </g>
+	</svg>
+</div>
+
+</section>

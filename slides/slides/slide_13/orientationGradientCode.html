@@ -1,0 +1,36 @@
+<style>
+	#orientation-gradient-code .wrapper {
+		position: relative;
+		height: 695px;
+	}
+
+	#orientation-gradient-code .orientation-image {
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		top: 50%;
+		/*width: 475px;*/
+		height: 660px;
+		margin: 0px !important;
+	}
+</style>
+
+<section id="orientation-gradient-code">
+
+<div class="wrapper">
+	  <img class="orientation-image" src="slides/slide_13/orientation-chords.png" />
+	  <img class="fragment orientation-image" data-fragment-index="1" src="slides/slide_13/orientation-gradientUnits.png" />
+	  <img class="fragment orientation-image" data-fragment-index="2" src="slides/slide_13/orientation-locations.png" />
+</div>
+
+<pre><code class="language-javascript" data-noescape data-trim>
+linearChordGradients
+	//...use the chord.chords() dataset to append a linear gradient for each chord
+	<span class="fragment" data-fragment-index="1">//Instead of the object bounding box, use the user coordinate system for setting locations
+	.attr("gradientUnits", "userSpaceOnUse")</span>
+	<span class="fragment" data-fragment-index="2">.attr("x1", function(d,i) { return source.x.location; }) //using d.source.startAngle & d.source.endAngle
+	//...do the same for y1, x2 and y2</span>
+	
+</code></pre>
+
+</section>

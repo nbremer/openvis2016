@@ -1,0 +1,27 @@
+<style>
+    #legend-code-two .percentages {
+        font-size: 18px;
+        fill: #FFFFFF;
+        font-weight: 300;
+        text-anchor: middle;
+    }
+</style>
+
+<section id="legend-code-two">
+	<div id="legendCodeTwo"></div>
+
+<pre><code class="language-javascript" data-noescape data-trim>
+<span class="fragment" data-fragment-index="1">//Set the color for the start (0%)
+linearGradient.append("stop") 
+    .attr("offset", "0%")   
+    .attr("stop-color", "#ffa474"); //light blue</span>
+
+<span class="fragment" data-fragment-index="2">//Set the color for the end (100%)
+linearGradient.append("stop") 
+    .attr("offset", "100%")   
+    .attr("stop-color", "#8b0000"); //dark blue</span>
+
+<span class="fragment" data-fragment-index="3">d3.select("#legend-rectangle")
+    .style("fill", "url(#linear-gradient)");</span>
+</code></pre>
+</section>

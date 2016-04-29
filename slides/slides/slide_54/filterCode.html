@@ -1,0 +1,44 @@
+<style>
+
+	#filter-code .title {
+	    font-size: 36px;
+	    color: #959595;
+	    font-weight: 300;
+	}
+
+	#filter-code .credit {
+	    font-size: 14px;
+	    color: #AAAAAA;
+	    font-weight: 300;
+	}
+
+	#filter-code img {
+/*		position: absolute;
+		left: 50%;
+		transform: translate(-50%,0%);
+		top: 0%;*/
+		height: 600px;
+		/*margin: 0px !important;*/
+	}
+</style>
+
+<section id="filter-code" data-state="removeSVGs">
+
+<!-- <div class="title">SVG Filters</div> -->
+<img class="spreadImage" src="slides/slide_54/svgFilterHexagon-5.png"/>
+
+<span class="fragment" data-fragment-index="1">
+<pre><code class="language-javascript" data-noescape data-trim>
+//Initialize an SVG filter
+var filter = defs.append("filter")
+	.attr("id","filter-id");
+
+<span class="fragment" data-fragment-index="2">//...Append different filters</span>
+
+<span class="fragment" data-fragment-index="3">//Set the filter
+d3.selectAll(".element").style("filter", "url(#filter-id)");</span>
+</code></pre></span>
+
+<span class="credit">Image by Michael Mullany</span>
+
+</section>
