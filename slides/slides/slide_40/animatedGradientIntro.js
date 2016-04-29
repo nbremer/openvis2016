@@ -32,7 +32,7 @@ pt.animatedGradientIntro.init = function() {
 	///////////////////////////////////////////////////////////////////////////	
 
 	var SQRT3 = Math.sqrt(3),
-		hexRadius = Math.min(width, height)/2,
+		hexRadius = Math.min(width, height)/2, 
 		hexWidth = SQRT3 * hexRadius,
 		hexHeight = 2 * hexRadius;
 	var hexagonPoly = [[0,-1],[SQRT3/2,0.5],[0,1],[-SQRT3/2,0.5],[-SQRT3/2,-0.5],[0,-1],[SQRT3/2,-0.5]];
@@ -45,7 +45,7 @@ pt.animatedGradientIntro.init = function() {
 	var defs = svg.append("defs");
 	var linearGradient = defs.append("linearGradient")
 		.attr("gradientUnits", "userSpaceOnUse")
-		.attr("id","animatedGradientIntro")
+		.attr("id","animatedGradientIntroFilter") //Make filter truly uniue id in entire script
 		.attr("x1","0%")
 		.attr("y1","0%")
 		.attr("x2","100%")
@@ -160,7 +160,7 @@ pt.animatedGradientIntro.init = function() {
 		.attr("class", "chord")
 		.style("stroke", "none")
 		//.style("fill", "#C4C4C4")
-		.style("fill", "url(#animatedGradientIntro)")
+		.style("fill", "url(#animatedGradientIntroFilter)")
 		.style("opacity", function(d) { return (Names[d.source.index] === "" ? 0 : opacityDefault); }) //Make the dummy strokes have a zero opacity (invisible)
 		.attr("d", path);
 

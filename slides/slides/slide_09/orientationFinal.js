@@ -69,7 +69,7 @@ pt.orientationFinal.init = function() {
 	////////////////////////////////////////////////////////////
 
 	//Function to create the id for each chord gradient
-	function getGradID(d){ return "chordGrad-" + d.source.index + "-" + d.target.index; }
+	function getGradID(d){ return "chordGrad-final-" + d.source.index + "-" + d.target.index; }
 
 	//Create the gradients definitions for each chord
 	var grads = svg.append("defs").selectAll("linearGradient")

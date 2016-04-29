@@ -3,10 +3,7 @@ pt.babyNamesFinal = pt.babyNamesFinal || {};
 pt.babyNamesFinal.init = function() {
 	
 	//Remove any existing svgs
-	d3.select('#baby-names-final #babyNamesFinalContext svg').remove();
-	d3.select('#baby-names-final #babyNamesFinalFocus svg').remove();
-	d3.select('#baby-names-final #babyNamesFinalColorLegend svg').remove();
-	d3.select('#baby-names-final #babyNamesFinalWidthLegend svg').remove();
+	d3.selectAll('#baby-names-final svg').remove();
 
 	///////////////////////////////////////////////////////////////////////////
 	//////////////////// Set up and initiate svg containers ///////////////////
@@ -255,7 +252,7 @@ pt.babyNamesFinal.update = function() {
 
 	//Append clippath to focus chart
 	focus.append("defs").append("clipPath")
-	    .attr("id", "clip")
+	    .attr("id", "clipFocus")
 	    .append("rect")
 	    .attr("width", width)
 	    .attr("height", heightBrush);	
@@ -570,7 +567,7 @@ pt.babyNamesFinal.update = function() {
 		.attr("class", function(d) {return "focus " + d.name ;})
 		.append("path")
 			.attr("class", "line")
-			.attr("clip-path", "url(#clip)")
+			.attr("clip-path", "url(#clipFocus)")
 			.style("pointer-events", "none")
 			.style("stroke-linejoin", "round")
 			.style("opacity", 0)

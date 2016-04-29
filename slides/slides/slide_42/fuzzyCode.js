@@ -60,6 +60,7 @@ pt.fuzzyCode.init = function() {
 		.enter().append("filter")
 		.attr("class", "exampleFilters")
 		.attr("id",function(d,i) { return "fuzzy-range-"+i; })
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("in","SourceGraphic")
 		.attr("stdDeviation",function(d) { return d + ",0"; });
@@ -70,6 +71,7 @@ pt.fuzzyCode.init = function() {
 		.enter().append("filter")
 		.attr("class", "flyCircleFilters")
 		.attr("id",function(d,i) { return "fuzzy-"+i; })
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("class", "blurValues")
 		.attr("in","SourceGraphic")

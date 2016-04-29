@@ -38,22 +38,23 @@ pt.biggestCities.init = function() {
 
 	//SVG filter for the gooey effect
 	//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
-	var defs = svg.append('defs');
-	var filter= defs.append('filter').attr('id','gooey');
-	filter.append('feGaussianBlur')
-		.attr('in','SourceGraphic')
-		.attr('stdDeviation','8')
-		.attr('result','blur');
-	filter.append('feColorMatrix')
+	var defs = svg.append("defs");
+	var filter= defs.append("filter").attr("id","gooey");
+	filter.append("feGaussianBlur")
+		.attr("in","SourceGraphic")
+		.attr("stdDeviation","8")
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
+		.attr("result","blur");
+	filter.append("feColorMatrix")
 		.attr("class", "blurValues")
-		.attr('in','blur')
-		.attr('mode','matrix')
-		.attr('values','1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5')
-		.attr('result','goo');
-	filter.append('feBlend')
-		.attr('in','SourceGraphic')
-		.attr('in2','goo')
-		.attr('operator','atop');
+		.attr("in","blur")
+		.attr("mode","matrix")
+		.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5")
+		.attr("result","gooey");
+	filter.append("feBlend")
+		.attr("in","SourceGraphic")
+		.attr("in2","gooey")
+		.attr("operator","atop");
 
  	///////////////////////////////////////////////////////////////////////////
 	//////////////////////////// Set-up Map /////////////////////////////////

@@ -91,7 +91,7 @@ pt.sliderMoveCode.update = function() {
 
 	//Initiate clippath to context chart
 	defs.append("clipPath")
-	    .attr("id", "clipContext")
+	    .attr("id", "clipContextSlider")
 	    .append("rect")
 	    .attr("width", width)
 	    .attr("height", height);
@@ -229,7 +229,7 @@ pt.sliderMoveCode.update = function() {
 
 	var contextWrapper = svg.append("g")
 		.attr("class", "contextWrapper")
-		.attr("clip-path", "url(#clipContext)");
+		.attr("clip-path", "url(#clipContextSlider)");
 		
 	//Add the lines to context chart
 	contextWrapper.selectAll(".line")
@@ -272,7 +272,7 @@ pt.sliderMoveCode.update = function() {
 
 	//Create arrow markers
 	defs.append("marker")
-	    .attr("id", "arrowMarker")
+	    .attr("id", "arrowMarkerSlider")
 	    .attr("viewBox", "0 -5 10 10")
 	    .attr("refX", 8)
 	    .attr("refY", 0)
@@ -298,7 +298,7 @@ pt.sliderMoveCode.update = function() {
 		.style("fill", "none")
 		.style("stroke", "#7F7F7F")
 		.style("stroke-width", 1)
-		.attr("marker-end", "url(#arrowMarker)");
+		.attr("marker-end", "url(#arrowMarkerSlider)");
 
 	///////////////////////////////////////////////////////////////////////////
 	////////////////////////// Draw the Gradient Rect /////////////////////////

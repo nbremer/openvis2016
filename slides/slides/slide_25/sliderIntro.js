@@ -128,7 +128,7 @@ pt.sliderIntro.update = function() {
 
 	//Create a clip path that is the same as the top hexagon
 	defs.append("clipPath")
-	    .attr("id", "clip")
+	    .attr("id", "clipSlider")
 	    .append("path")
 	    .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);	
 			
@@ -137,8 +137,8 @@ pt.sliderIntro.update = function() {
 	////////////////////////////////////////////////////////////// 
 
 	var focusWrapper = svg.append("g")
-		.attr("clip-path", "url(#clip")
-		.style("clip-path", "url(#clip)"); //make it work in safari
+		.attr("clip-path", "url(#clipSlider")
+		.style("clip-path", "url(#clipSlider)"); //make it work in safari
 
 	//Add the lines to focus chart 
 	focusWrapper.selectAll(".focus")

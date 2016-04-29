@@ -49,13 +49,14 @@ pt.gooeyIntro.init = function() {
 	filter.append("feGaussianBlur")
 		.attr("in","SourceGraphic")
 		.attr("stdDeviation","10")
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.attr("result","blur");
 	filter.append("feColorMatrix")
 		.attr("in","blur")
 		.attr("mode","matrix")
 		.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7")
 		.attr("result","gooey");
-	// filter.append('feComposite')
+	// filter.append('feComposite') //feBlend?
 	// 	.attr('in','SourceGraphic')
 	// 	.attr('in2','gooey')
 	// 	.attr('operator','atop');	

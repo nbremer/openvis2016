@@ -95,6 +95,7 @@ pt.fuzzyIntro.init = function() {
 		.data(randStart)
 		.enter().append("filter")
 		.attr("id",function(d,i) { return "fuzzy-" + d.id; })
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("class", "blurValues")
 		.attr("in","SourceGraphic")

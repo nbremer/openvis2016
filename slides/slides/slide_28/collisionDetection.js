@@ -47,20 +47,21 @@ pt.collisionDetection.init = function() {
 	//SVG filter for the gooey effect
 	//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
 	var defs = svg.append("defs");
-	var filter= defs.append("filter").attr("id","gooey");
+	var filter= defs.append("filter").attr("id","gooeyCollision");
 	filter.append("feGaussianBlur")
 		.attr("in","SourceGraphic")
 		.attr("stdDeviation","10")
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.attr("result","blur");
 	filter.append("feColorMatrix")
 		.attr("class", "blurValues")
 		.attr("in","blur")
 		.attr("mode","matrix")
 		.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7")
-		.attr("result","goo");
+		.attr("result","gooey");
 	// filter.append("feBlend")
 	// 	.attr("in","SourceGraphic")
-	// 	.attr("in2","goo");
+	// 	.attr("in2","gooey");
 
  	///////////////////////////////////////////////////////////////////////////
 	//////////////////////////// Set-up Force /////////////////////////////////
@@ -122,7 +123,7 @@ pt.collisionDetection.init = function() {
 
 	var circleWrapper = svg.append("g")
 		.attr("class", "circleWrapper")
-		//.style("filter", "url(#gooey)");
+		//.style("filter", "url(#gooeyCollision)");
 
 	circleWrapper.selectAll("circle")
 	    .data(nodes.slice(1))
@@ -145,7 +146,7 @@ pt.collisionDetection.noGooey = function() {
 }//noGooey
 
 pt.collisionDetection.gooey = function() {
-	d3.select("#collision-detection .circleWrapper").style("filter", "url(#gooey)");
+	d3.select("#collision-detection .circleWrapper").style("filter", "url(#gooeyCollision)");
 }//gooey
 
 

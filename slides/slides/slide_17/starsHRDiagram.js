@@ -262,7 +262,7 @@ pt.starsHRDiagram.placeStars = function(stars) {
 
 	//Filter for the outside glow of the Sun
 	var filter = defsContainer.append('filter').attr('id','glow'),
-		feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','3.5').attr('result','coloredBlur'),
+		feGaussianBlur = filter.append('feGaussianBlur').attr('stdDeviation','2.5').attr('result','coloredBlur'),
 		feMerge = filter.append('feMerge');
 		feMerge.append('feMergeNode').attr('in','coloredBlur');
 		feMerge.append('feMergeNode').attr('in','SourceGraphic');

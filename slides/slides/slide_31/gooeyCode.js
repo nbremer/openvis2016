@@ -26,7 +26,6 @@ pt.gooeyCode.init = function() {
 		.attr("height", height + margin.top + margin.bottom);
 		
 	var svg = pt.gooeyCode.svg.append("g")
-		.style("filter", "url(#gooeyCode)") //Set the filter on the container svg
 		.attr("transform", "translate(" + (width/2 + margin.left) + "," +(height/2 +  margin.top) + ")");
 
 	///////////////////////////////////////////////////////////////////////////
@@ -36,10 +35,11 @@ pt.gooeyCode.init = function() {
 	//SVG filter for the gooey effect
 	//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
 	var defs = svg.append("defs");
-	var filter = defs.append("filter").attr("id","gooeyCode");
+	var filter = defs.append("filter").attr("id","gooeyCodeFilter");
 	filter.append("feGaussianBlur")
 		.attr("in","SourceGraphic")
 		.attr("stdDeviation","10")
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.attr("result","blur");
 	filter.append("feColorMatrix")
 		.attr("in","blur")
@@ -48,7 +48,7 @@ pt.gooeyCode.init = function() {
 		.attr("result","gooey");
 	//If you want the end shapes to be exactly the same size as without the filter
 	//add the feComposite below. However this will result in a less beautiful gooey effect
-	// filter.append("feComposite")
+	// filter.append("feComposite") //feBlend
 	// 	.attr("in","SourceGraphic")
 	// 	.attr("in2","gooey")
 	// 	.attr("operator","atop");	
@@ -63,7 +63,7 @@ pt.gooeyCode.init = function() {
 		.range([-width/2, width/2]);
 		
 	var circleWrapper = svg.append("g")
-		.style("filter", "url(#gooeyCode)");
+		.style("filter", "url(#gooeyCodeFilter)");
 
 	//Append circle at center
 	circleWrapper.append("circle")

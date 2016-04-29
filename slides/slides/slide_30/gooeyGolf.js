@@ -37,19 +37,20 @@ pt.gooeyGolf.init = function() {
 	//SVG filter for the gooey effect
 	//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
 	var defs = pt.gooeyGolf.svg.append("defs");
-	var filter = defs.append("filter").attr("id","gooeyGolf");
+	var filter = defs.append("filter").attr("id","gooeyGolfFilter"); //Give this a truly unique unique ID otherwise Firefox will not show anything
 	filter.append("feGaussianBlur")
 		.attr("in","SourceGraphic")
 		.attr("stdDeviation","10")
+		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.attr("result","blur");
 	filter.append("feColorMatrix")
 		.attr("in","blur")
 		.attr("mode","matrix")
-		.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -10")
+		.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9")
 		.attr("result","gooey");
-	// filter.append("feBlend")
-	// 	.attr("in","SourceGraphic")
-	// 	.attr("in2","goo");
+	filter.append("feBlend")
+		.attr("in","SourceGraphic")
+		.attr("in2","gooey");
 
  	///////////////////////////////////////////////////////////////////////////
 	//////////////////////////// Set-up Chart /////////////////////////////////
@@ -72,8 +73,12 @@ pt.gooeyGolf.init = function() {
 	  .attr("transform", "translate(0," + 50 + ")")
 	  .call(pt.gooeyGolf.ballSpeedAxis);
 
+	//Outer wrapper for the circles
+	pt.gooeyGolf.ballOuterWrapper = pt.gooeyGolf.svg.append("g")
+	  .attr("class", "ballOuterWrapper");
+	  
 	//Append circle at starting point
-	pt.gooeyGolf.svg.append("circle")
+	pt.gooeyGolf.ballOuterWrapper.append("circle")
 			.attr("class", "startCircle")
 			.attr("cx", 0)
 			.attr("cy", 0)
@@ -135,7 +140,7 @@ pt.gooeyGolf.swingSimple = function() {
 		
 	  	//DATA JOIN
 		//Join new data with old elements, if any
-		var ballSpeedWrapper = pt.gooeyGolf.svg.selectAll(".ballSpeedCircle")
+		var ballSpeedWrapper = pt.gooeyGolf.ballOuterWrapper.selectAll(".ballSpeedCircle")
 			.data(pt.gooeyGolf.data, function(d) { return d.id; });
 	  
 		//UPDATE
@@ -182,7 +187,7 @@ pt.gooeyGolf.swingFly = function() {
 		.attr("r", 20);
 
 	//Remove gooey filter
-	pt.gooeyGolf.svg.style("filter", "none");
+	pt.gooeyGolf.ballOuterWrapper.style("filter", "none");
 
 	setTimeout(function() {
 
@@ -219,7 +224,7 @@ pt.gooeyGolf.swingFly = function() {
 		
 	  	//DATA JOIN
 		//Join new data with old elements, if any
-		var ballSpeedWrapper = pt.gooeyGolf.svg.selectAll(".ballSpeedCircle")
+		var ballSpeedWrapper = pt.gooeyGolf.ballOuterWrapper.selectAll(".ballSpeedCircle")
 			.data(pt.gooeyGolf.data, function(d) { return d.id; });
 	  
 		//UPDATE
@@ -266,7 +271,7 @@ pt.gooeyGolf.swingFinal = function() {
 		.attr("r", 15);
 
 	//Set gooey filter
-	pt.gooeyGolf.svg.style("filter", "url(#gooeyGolf)");
+	pt.gooeyGolf.ballOuterWrapper.style("filter", "url(#gooeyGolfFilter)");
 
 	setTimeout(function() {
 
@@ -302,7 +307,7 @@ pt.gooeyGolf.swingFinal = function() {
 			.call(pt.gooeyGolf.ballSpeedAxis);
 	
 		//Increase size of circle at 0,0 (then the swing is "ejected" and then decrease size again
-		pt.gooeyGolf.svg.select(".startCircle")
+		pt.gooeyGolf.ballOuterWrapper.select(".startCircle")
 			.transition("startCircleGrow").duration(1000)
 			.delay((ballSpeedDelay-1000))
 			.attr("r", 40)
@@ -312,7 +317,7 @@ pt.gooeyGolf.swingFinal = function() {
 		
 	  	//DATA JOIN
 		//Join new data with old elements, if any
-		var ballSpeedWrapper = pt.gooeyGolf.svg.selectAll(".ballSpeedCircle")
+		var ballSpeedWrapper = pt.gooeyGolf.ballOuterWrapper.selectAll(".ballSpeedCircle")
 			.data(pt.gooeyGolf.data, function(d) { return d.id; });
 	  
 		//UPDATE

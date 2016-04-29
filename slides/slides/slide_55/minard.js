@@ -132,13 +132,13 @@ pt.minard.init = function() {
 		.attr("dur","5s")
 		.attr("repeatCount","indefinite");
 
-	backGradient.append("animate")
+	forwardGradient.append("animate")
 		.attr("attributeName","y1")
 		.attr("values","3%;6%")
 		.attr("dur","3s")
 		.attr("repeatCount","indefinite");
 
-	backGradient.append("animate")
+	forwardGradient.append("animate")
 		.attr("attributeName","y2")
 		.attr("values","0%;3%")
 		.attr("dur","3s")

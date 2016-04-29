@@ -59,7 +59,7 @@ pt.glowIntro.init = function() {
 
 	//Create a clip path that is the same as the top hexagon
 	defs.append("clipPath")
-	    .attr("id", "clip")
+	    .attr("id", "clipGlowIntroFilter")
 	    .append("path")
 	    .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
 	
@@ -69,8 +69,8 @@ pt.glowIntro.init = function() {
 
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapper = svg.append("g")
-		.attr("clip-path", "url(#clip")
-		.style("clip-path", "url(#clip)") //make it work in safari
+		.attr("clip-path", "url(#clipGlowIntroFilter")
+		.style("clip-path", "url(#clipGlowIntroFilter)") //make it work in safari
 		.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")");
 
