@@ -48,7 +48,8 @@ pt.gradientIntro.init = function() {
 	   .range(["#2c7bb6", "#ffff8c", "#d7191c"])
 	   .interpolate(d3.interpolateHcl);
 
-	pt.gradientIntro.svg.append("defs").append("linearGradient")
+	var defs = svg.append("defs");
+	defs.append("linearGradient")
 		.attr("id", "gradientRainbow")
 		.attr("gradientUnits", "userSpaceOnUse") 
 		.attr("x1", -hexWidth/2*0.9).attr("y1", 0)
@@ -59,15 +60,15 @@ pt.gradientIntro.init = function() {
 		.attr("offset", function(d,i) { return (i/(numColors-1)*100) + "%"; })   
 		.attr("stop-color", function(d) { return colorScale(d); });
 
-	///////////////////////////////////////////////////////////////////////////
-	////////////////////// Place circles inside hexagon ///////////////////////
-	///////////////////////////////////////////////////////////////////////////	
-
 	//Create a clip path that is the same as the top hexagon
-	svg.append("clipPath")
+	defs.append("clipPath")
         .attr("id", "clip")
         .append("path")
         .attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath);
+		
+	///////////////////////////////////////////////////////////////////////////
+	////////////////////// Place circles inside hexagon ///////////////////////
+	///////////////////////////////////////////////////////////////////////////	
 
     //First append a group for the clip path, then a new group that can be transformed
 	var circleWrapper = svg.append("g")
