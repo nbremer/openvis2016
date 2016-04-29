@@ -1,3 +1,9 @@
+//Check if it's Safari
+var is_safari = false;
+if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+	is_safari = true;
+}
+
 //Function to only run once after the last transition ends
 function endall(transition, callback) { 
 	var n = 0; 

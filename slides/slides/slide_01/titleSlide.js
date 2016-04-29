@@ -527,7 +527,7 @@ pt.titleSlide.planet = function(svg) {
 //General idea from Maarten Lambrecht's block: http://bl.ocks.org/maartenzam/f35baff17a0316ad4ff6
 pt.titleSlide.move = function() {
 
-	//return;
+	if(is_safari) return;
 	
 	var SQRT3 = pt.titleSlide.SQRT3,
 		hexRadius = pt.titleSlide.hexRadius,
