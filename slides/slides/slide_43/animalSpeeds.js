@@ -173,7 +173,7 @@ pt.animalSpeeds.init = function() {
 		.enter().append("g")
 		.attr("class", "animalGroupsOuter")
 		.attr("transform", function(d,i) { return "translate(0," + i*(height/animals.length) + ")"; })
-		.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
+		//.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
 
 	animalGroups = animalGroupsOuter.append("g")
 		.attr("class", "animalGroups");
@@ -225,11 +225,14 @@ pt.animalSpeeds.setInPlace = function() {
 	d3.selectAll("#animalSpeeds .animalImage")
 		.transition("changeOpacity").duration(0)
 		.style("opacity", 0);	
+		
+	d3.selectAll(".animalGroupsOuter")
+		.style("filter", "none");
 
 }//setInPlace
 
 pt.animalSpeeds.fuzzyInPlace = function() {
-
+	
 	if(pt.animalSpeeds.direction === "forward") {
 		var dur = 1000,
 			del = 100;	
@@ -317,6 +320,10 @@ pt.animalSpeeds.flyOut = function(direction) {
 	var dur = 1500,
 		del = 100;
 
+	//Set filter on the group elements
+	d3.selectAll(".animalGroupsOuter")
+		.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
+		
 	//In case you move backward
 	if(pt.animalSpeeds.direction === "backward") {
 		d3.selectAll("#animalSpeeds .animalCircleWrapper")

@@ -45,39 +45,82 @@ pt.animatedGradientIntro.init = function() {
 	var defs = svg.append("defs");
 	var linearGradient = defs.append("linearGradient")
 		.attr("gradientUnits", "userSpaceOnUse")
-		.attr("id","animatedGradientIntroFilter") //Make filter truly uniue id in entire script
-		.attr("x1","0%")
-		.attr("y1","0%")
-		.attr("x2","100%")
-		.attr("y2","0%")
-		.attr("spreadMethod", "reflect");
-		
-	linearGradient.selectAll(".stop")
-		.data([
-			{offset: 0.025, color: "#FDA860"},
-			{offset: 0.14, color: "#FC8669"},
-			{offset: 0.28, color: "#E36172"},
-			{offset: 0.42, color: "#C64277"},
-			{offset: 0.56, color: "#C64277"},
-			{offset: 0.70, color: "#E36172"},
-			{offset: 0.84, color: "#FC8669"},
-			{offset: 0.975, color: "#FDA860"}])
-		.enter().append("stop")
-		.attr("offset", function(d) { return d.offset; })
-		.attr("stop-color", function(d) { return d.color; });
+	.attr("id","animatedGradientIntroID"); //Make filter truly uniue id in entire script
+	
+	//Safari has a bug and can't handle spreadMethod reflect, thus create something that optically looks like it's going on idefinitely
+	if(is_safari) {
+		linearGradient.attr("x1","-75%")
+			.attr("y1","0%")
+			.attr("x2","25%")
+			.attr("y2","0%");
+	
+		linearGradient.selectAll(".stop")
+			.data([
+				{offset: 0, color: "#C64277"},
+				{offset: 0.083, color: "#E36172"},
+				{offset: 0.166, color: "#FC8669"},
+				{offset: 0.25, color: "#FDA860"},
+				{offset: 0.33, color: "#FC8669"},
+				{offset: 0.417, color: "#E36172"},
+				{offset: 0.5, color: "#C64277"},
+				{offset: 0.583, color: "#E36172"},
+				{offset: 0.66, color: "#FC8669"},
+				{offset: 0.75, color: "#FDA860"},
+				{offset: 0.83, color: "#FC8669"},
+				{offset: 0.916, color: "#E36172"},
+				{offset: 1, color: "#C64277"},
+			])
+			.enter().append("stop")
+			.attr("offset", function(d) { return d.offset; })
+			.attr("stop-color", function(d) { return d.color; });
 
-	linearGradient.append("animate")
-		.attr("attributeName","x1")
-		.attr("values","0%;100%")
-		.attr("dur","7s")
-		.attr("repeatCount","indefinite");
+		linearGradient.append("animate")
+			.attr("attributeName","x1")
+			.attr("values","-75%;-25%")
+			.attr("dur","7s")
+			.attr("repeatCount","indefinite");
 
-	linearGradient.append("animate")
-		.attr("attributeName","x2")
-		.attr("values","100%;200%")
-		.attr("dur","7s")
-		.attr("repeatCount","indefinite");
+		linearGradient.append("animate")
+			.attr("attributeName","x2")
+			.attr("values","25%;75%")
+			.attr("dur","7s")
+			.attr("repeatCount","indefinite");
+	} else {
+		//Although Chrome and Firefox would also work with the code above
+		//I wanted to show the shorter method for when reflect does work
+		linearGradient.attr("x1","0%")
+			.attr("y1","0%")
+			.attr("x2","100%")
+			.attr("y2","0%")
+			.attr("spreadMethod", "reflect");
 
+		linearGradient.selectAll(".stop")
+			.data([
+				{offset: 0, color: "#C64277"},
+				{offset: 0.167, color: "#E36172"},
+				{offset: 0.33, color: "#FC8669"},
+				{offset: 0.5, color: "#FDA860"},
+				{offset: 0.66, color: "#FC8669"},
+				{offset: 0.833, color: "#E36172"},
+				{offset: 1, color: "#C64277"},
+			])
+			.enter().append("stop")
+			.attr("offset", function(d) { return d.offset; })
+			.attr("stop-color", function(d) { return d.color; });
+
+		linearGradient.append("animate")
+			.attr("attributeName","x1")
+			.attr("values","0%;100%")
+			.attr("dur","7s")
+			.attr("repeatCount","indefinite");
+
+		linearGradient.append("animate")
+			.attr("attributeName","x2")
+			.attr("values","100%;200%")
+			.attr("dur","7s")
+			.attr("repeatCount","indefinite");		
+	}//else
+	
 	//Create a clip path that is the same as the top hexagon
 	defs.append("clipPath")
         .attr("id", "clip")
@@ -147,12 +190,13 @@ pt.animatedGradientIntro.init = function() {
 		.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")");
 
+	// //Get a better overview of the gradient - for testing
 	// chordWrapper.append("rect")
 	// 	.attr("x", -width/2)
 	// 	.attr("y", -height/2)
 	// 	.attr("width", width)
 	// 	.attr("height", height)
-	// 	.style("fill", "url(#animatedGradientIntro)");
+	// 	.style("fill", "url(#animatedGradientIntroID)");
 
 	var chords = chordWrapper.selectAll("path.chord")
 		.data(chord.chords)
@@ -160,7 +204,7 @@ pt.animatedGradientIntro.init = function() {
 		.attr("class", "chord")
 		.style("stroke", "none")
 		//.style("fill", "#C4C4C4")
-		.style("fill", "url(#animatedGradientIntroFilter)")
+		.style("fill", "url(#animatedGradientIntroID)")
 		.style("opacity", function(d) { return (Names[d.source.index] === "" ? 0 : opacityDefault); }) //Make the dummy strokes have a zero opacity (invisible)
 		.attr("d", path);
 

@@ -40,39 +40,48 @@ pt.stretchedChordFinal.init = function() {
 
 	var defs = svg.append("defs");
 	var linearGradient = defs.append("linearGradient")
-		.attr("id","animatedGradient")
-		.attr("x1","0%")
+		.attr("id","animatedGradient");
+		
+	//The gradient definition below isn't the fastest or most optimal way
+	//but because safari can't handle spreadMethod reflect I had to make
+	//changes. This will result in an optically indefinite flow
+	linearGradient.attr("x1","-100%")
 		.attr("y1","0%")
 		.attr("x2","100%")
-		.attr("y2","0")
+		.attr("y2","0%")
 		.attr("spreadMethod", "reflect");
 
-	linearGradient.append("stop")
-		.attr("class", "stop1")
-		.attr("offset","5%")
-		.attr("stop-color","#CDCDCD");
-	linearGradient.append("stop")
-		.attr("class", "stop2")
-		.attr("offset","45%")
-		.attr("stop-color","#CDCDCD");
-	linearGradient.append("stop")
-		.attr("class", "stop3")
-		.attr("offset","55%")
-		.attr("stop-color","#CDCDCD");
-	linearGradient.append("stop")
-		.attr("class", "stop4")
-		.attr("offset","95%")
-		.attr("stop-color","#CDCDCD");
+	linearGradient.selectAll(".stop")
+		.data([
+			{className: "stop1", offset: 0, color: "#E8E8E8"},
+			{className: "stop2", offset: 0.125, color: "#A3A3A3"},
+			{className: "stop3", offset: 0.25, color: "#E8E8E8"},
+			{className: "stop4", offset: 0.375, color: "#A3A3A3"},
+			{className: "stop5", offset: 0.5, color: "#E8E8E8"},
+			{className: "stop6", offset: 0.625, color: "#A3A3A3"},
+			{className: "stop7", offset: 0.75, color: "#E8E8E8"},
+			{className: "stop8", offset: 0.875, color: "#A3A3A3"},
+			{className: "stop9", offset: 1, color: "#E8E8E8"}
+			
+			// //Other possibility
+			// {className: "stop1", offset: 0, color: "#E8E8E8"},
+			// {className: "stop2", offset: 0.25, color: "#A3A3A3"},
+			// {className: "stop3", offset: 0.5, color: "#E8E8E8"},
+			// {className: "stop4", offset: 0.75, color: "#A3A3A3"},
+			// {className: "stop5", offset: 1, color: "#E8E8E8"}
+		])
+		.enter().append("stop")
+		.attr("class", function(d) { return d.className; })
+		.attr("offset", function(d) { return d.offset; })
+		.attr("stop-color", "#CDCDCD");
 
 	linearGradient.append("animate")
-		.attr("class", "animate1")
 		.attr("attributeName","x1")
-		.attr("values","0%;100%")
+		.attr("values","-100%;0%")
 		.attr("dur","7s")
 		.attr("repeatCount","indefinite");
 
 	linearGradient.append("animate")
-		.attr("class", "animate2")
 		.attr("attributeName","x2")
 		.attr("values","100%;200%")
 		.attr("dur","7s")
@@ -179,6 +188,14 @@ pt.stretchedChordFinal.init = function() {
 	//////////////////// Draw outer Arcs ///////////////////////
 	////////////////////////////////////////////////////////////
 
+	// //Get a better overview of the gradient - for testing
+	// svg.append("rect")
+	// 	.attr("x", -width/2)
+	// 	.attr("y", -height/2)
+	// 	.attr("width", width)
+	// 	.attr("height", height)
+	// 	.style("fill", "url(#animatedGradient)");
+		
 	var g = svg.selectAll("g.group")
 		.data(chord.groups)
 		.enter().append("g")
@@ -245,28 +262,8 @@ pt.stretchedChordFinal.init = function() {
 	function startAngle(d) { return d.startAngle + offset; }
 	function endAngle(d) { return d.endAngle + offset; }
 
-	// // Returns an event handler for fading a given chord group
-	// function fade(opacity) {
-	//   return function(d, i) {
-	// 	svg.selectAll("path.chord")
-	// 		.filter(function(d) { return d.source.index !== i && d.target.index !== i && Names[d.source.index] !== ""; })
-	// 		.transition("fadeOnArc")
-	// 		.style("opacity", opacity);
-	//   };
-	// }//fade
-
-	// // Fade function when hovering over chord
-	// function fadeOnChord(d) {
-	// 	var chosen = d;
-	// 	svg.selectAll("path.chord")
-	// 		.transition("fadeOnChord")
-	// 		.style("opacity", function(d) {
-	// 			return d.source.index === chosen.source.index && d.target.index === chosen.target.index ? opacityDefault : opacityLow;
-	// 		});
-	// }//fadeOnChord
-
-	/*Taken from http://bl.ocks.org/mbostock/7555321
-	//Wraps SVG text*/
+	//Taken from http://bl.ocks.org/mbostock/7555321
+	//Wraps SVG text
 	function wrapChord(text, width) {
 	  text.each(function() {
 		var text = d3.select(this),
@@ -297,10 +294,7 @@ pt.stretchedChordFinal.init = function() {
 pt.stretchedChordFinal.greyChords = function() {
 
 	//Update all stop-colors to the same color
-	d3.selectAll("#stretchedChordFinal .stop1, #stretchedChordFinal .stop4")
-		.transition().duration(1000)
-		.attr("stop-color","#CDCDCD");
-	d3.selectAll("#stretchedChordFinal .stop2, #stretchedChordFinal .stop3")
+	d3.selectAll("#stretchedChordFinal stop")
 		.transition().duration(1000)
 		.attr("stop-color","#CDCDCD");
 
@@ -309,12 +303,9 @@ pt.stretchedChordFinal.greyChords = function() {
 pt.stretchedChordFinal.animatedChords = function() {
 
 	//Update the stop colors to 2 different sets so the flow becomes visible
-	d3.selectAll("#stretchedChordFinal .stop1, #stretchedChordFinal .stop4")
+	d3.selectAll("#stretchedChordFinal stop")
 		.transition().duration(1500)
-		.attr("stop-color","#E8E8E8");
-	d3.selectAll("#stretchedChordFinal .stop2, #stretchedChordFinal .stop3")
-		.transition().duration(1500)
-		.attr("stop-color","#A3A3A3");
+		.attr("stop-color",function(d) { return d.color; });
 
 }//animatedChords
 

@@ -8,11 +8,11 @@
  *
  */
 @import url(../lib/font/open-sans/open-sans.css);
-@import url(../lib/font/bangers/bangers.css);
-@import url(../lib/font/cardo/cardo.css);
-@import url(../lib/font/poiret-one/poiret-one.css);
+/*@import url(../lib/font/poiret-one/poiret-one.css);
 @import url(../lib/font/sue-ellen-francisco/sue-ellen-francisco.css);
 @import url(../lib/font/bad-script/bad-script.css);
+@import url(../lib/font/bangers/bangers.css);
+@import url(../lib/font/cardo/cardo.css);*/
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff; }
 

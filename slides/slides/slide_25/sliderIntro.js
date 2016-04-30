@@ -170,28 +170,13 @@ pt.sliderIntro.update = function() {
 	var start = 0.25,
 		end = 0.55,
 		range = 0.20;
-		//current = start,
-		//sign = 1;	
-	// d3.timer(function() {
-	// 	    //Stop the timer of there is no longer and SVG
-	// 	    if(d3.select("#intro-slider #sliderIntro svg").empty()) {
-	// 	    	return true;
-	// 	    } else {
-	// 	    	d3.selectAll("#sliderIntro .left").attr("offset", current);
-	// 			d3.selectAll("#sliderIntro .right").attr("offset", current + 20);
-	// 			if (current == end) {
-	// 				sign = -1;
-	// 			} else if (current == start) {
-	// 				sign = 1;
-	// 			}
-	// 			current = current + sign*0.25;
-	// 	    }//else
-	// });
 
 	function moveGradient() {
-
+		
+		//Safari can only handle this function when loaded from local host
+		if(is_safari) return;
+		
 		var duration = 5000;
-		//console.log("still going");
 
 		//Move the left side of the gradient
 		d3.selectAll("#sliderIntro .left")
