@@ -226,6 +226,7 @@ pt.animalSpeeds.setInPlace = function() {
 		.transition("changeOpacity").duration(0)
 		.style("opacity", 0);	
 		
+	//For Firefox, remove the filter for a while
 	d3.selectAll(".animalGroupsOuter")
 		.style("filter", "none");
 

@@ -275,7 +275,6 @@ pt.titleSlide.slider = function(svg) {
 
 }//slider
 
-
 pt.titleSlide.gooey = function(svg) {
 
 	///////////////////////////////////////////////////////////////////////////
@@ -335,7 +334,6 @@ pt.titleSlide.gooey = function(svg) {
 
 }//gooey
 
-
 pt.titleSlide.colorAdd = function(svg) {
 
 	///////////////////////////////////////////////////////////////////////////
@@ -378,29 +376,36 @@ pt.titleSlide.animated = function(svg) {
 	var defs = svg.append("defs");
 	var linearGradient = defs.append("linearGradient")
 		.attr("gradientUnits", "userSpaceOnUse")
-		.attr("id","animatedGradientIntroSlide")
-		.attr("x1","0%")
+		.attr("id","animatedGradientIntroSlide");
+		
+	//The gradient definition below isn't the fastest or most optimal way
+	//but because safari can't handle spreadMethod reflect I had to make
+	//changes. This will result in an optically indefinite flow
+	linearGradient.attr("x1","-75%")
 		.attr("y1","0%")
-		.attr("x2","100%")
-		.attr("y2","0")
+		.attr("x2","25%")
+		.attr("y2","0%")
 		.attr("spreadMethod", "reflect");
 
+	var colors = d3.range(pt.titleSlide.numColors).concat(d3.range(pt.titleSlide.numColors).reverse());
+	colors = colors.concat(colors);
+	
 	linearGradient.selectAll("stop") 
-		.data( d3.range(pt.titleSlide.numColors).concat(d3.range(pt.titleSlide.numColors).reverse()) )                  
+		.data(colors)                  
 		.enter().append("stop") 
-		.attr("offset", function(d,i) { return (i/(2*pt.titleSlide.numColors-1)*100) + "%"; })   
+		.attr("offset", function(d,i) { return (i/(colors.length-1)*100) + "%"; })   
 		.attr("stop-color", function(d,i) { return pt.titleSlide.colorScale(d); });
 
 	linearGradient.append("animate")
 		.attr("attributeName","x1")
-		.attr("values","0%;100%")
-		.attr("dur","12s")
+		.attr("values","-75%;-25%")
+		.attr("dur","7s")
 		.attr("repeatCount","indefinite");
 
 	linearGradient.append("animate")
 		.attr("attributeName","x2")
-		.attr("values","100%;200%")
-		.attr("dur","12s")
+		.attr("values","25%;75%")
+		.attr("dur","7s")
 		.attr("repeatCount","indefinite");
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -412,6 +417,14 @@ pt.titleSlide.animated = function(svg) {
 		.attr("clip-path", "url(#clip")
 		.style("clip-path", "url(#clip)"); //make it work in safari
 
+	// //Get a better overview of the gradient - for testing
+	// circleWrapper.append("rect")
+	// 	.attr("x", -pt.titleSlide.hexWidth)
+	// 	.attr("y", -pt.titleSlide.hexHeight)
+	// 	.attr("width", pt.titleSlide.hexWidth*2)
+	// 	.attr("height", pt.titleSlide.hexHeight*2)
+	// 	.style("fill", "url(#animatedGradientIntroSlide)");
+		
     var circle = circleWrapper.selectAll(".dots")
     	.data(pt.titleSlide.randStart)
     	.enter().append("circle")
@@ -530,7 +543,7 @@ pt.titleSlide.planet = function(svg) {
 //General idea from Maarten Lambrecht's block: http://bl.ocks.org/maartenzam/f35baff17a0316ad4ff6
 pt.titleSlide.move = function() {
 
-	//if(is_safari) return;
+	//return;
 	
 	var SQRT3 = pt.titleSlide.SQRT3,
 		hexRadius = pt.titleSlide.hexRadius,
