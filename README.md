@@ -1,7 +1,7 @@
 #SVGs beyond mere shapes
 ##### The entire interactive presentation
 
-In this repo you can find the slides and underlying code for the presentation that I gave at OpenVis in Boston on April 25th, 2016. It might take a few seconds to load, but you should see something within ±5 seconds. Note that the presentation has a few CPU heavy slides, especially those with continuously moving objects
+In this repo you can find the slides and underlying code for the presentation that I gave at OpenVis in Boston on April 25th, 2016. It might take a few seconds to load, but you should see something within ±10 seconds. Note that the presentation has a few CPU heavy slides, especially those with continuously moving objects
 
 
 ####Please, please look at these slides in Chrome
@@ -34,3 +34,16 @@ If, for whatever strange reason, you don't want to use Chrome, here are some qui
 - Never checked in IE, I'm guessing it would just be too horrible to look at...
 
 Inside the slides/slides folder you'll see another layer of folders. Here each slide has gotten its own folder, but the numbering is based on the order in which I made them and not on the order on which they appear on the screen (this you can find in the index.html file).
+
+I've used the code developed by [ptamarit](https://github.com/hakimel/reveal.js/issues/456) to use D3 (and D3 transitions) in RevealJS slides 
+
+#####Bonus
+Some extra interactivity that is possible that might not be apparent at first sight:
+
+- In the "smooth-legend-SOM" slide with the Self-Organizing-Map (the hexagonal heatmap), move your mouse over the hexagons
+- In the "orientation-final" slide, with the final result of the Avengers Chord Diagram, wait and see each Avenger highlighted in (random) turn 
+- In the "baby-names-final" slide, with the Baby names visual. This one is fully functional, so you can move the window at the bottom and hover over each line to see the name
+- In the "slider-move-code" slide on the last section (after the grey-purple-grey rectangle is gone again), drag the coloured window. You can also increase and decrease the window by moving the ends of the coloured section
+- In the "growth-bmi" slide, with all the lines going from grey to orange/red hover over the lines to see which country it is
+- In the "spirograph" slide, click anywhere to get a different one drawn
+- In the "collision-detection" slide, play with the circles and gooey with your mouse. However this only works properly if your window is at the 1920x1080 resolution
