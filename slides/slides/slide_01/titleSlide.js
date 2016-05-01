@@ -117,7 +117,7 @@ pt.titleSlide.init = function() {
 		.attr("class", "hexagon")
 		.attr("d", "M0,0" + hexagonPath)
 		//.style("stroke", function(d,i) { return pt.titleSlide.colorScale((i)*pt.titleSlide.numColors/(hexLocations.length)); })
-		.style("stroke", "#CBCBCB")
+		.style("stroke", "#F2F2F2")
 		.style("stroke-width", "4px")
 		.style("fill", "none");
 
