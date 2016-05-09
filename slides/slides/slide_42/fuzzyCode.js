@@ -27,7 +27,6 @@ pt.fuzzyCode.init = function() {
 		.attr("height", height + margin.top + margin.bottom);
 		
 	var svg = pt.fuzzyCode.svg.append("g")
-		//.style("filter", "url(#fuzzy)")
 		.attr("transform", "translate(" + (width/2 + margin.left) + "," +(height/2 +  margin.top) + ")");
 
 	var color = "#F92672";
@@ -47,19 +46,22 @@ pt.fuzzyCode.init = function() {
 	}//for i
 
 	///////////////////////////////////////////////////////////////////////////
-	//////////////////////////// Create fuzzy filter //////////////////////////
+	/////////////////////// Create motion blur filter /////////////////////////
 	///////////////////////////////////////////////////////////////////////////	
 
-	//SVG filter for the fuzzy effect
+	//SVG filter for the motion blur effect
 	//Code based on http://tympanus.net/codrops/2015/04/08/motion-blur-effect-svg/
 	var defs = svg.append("defs");
 	
+	//Create a filter for the static example circles at the start
 	var fuzzRanges = [0,2,4,6,8];
 	defs.selectAll(".exampleFilters")
 		.data(fuzzRanges)
 		.enter().append("filter")
 		.attr("class", "exampleFilters")
 		.attr("id",function(d,i) { return "fuzzy-range-"+i; })
+		.attr("width", "300%")	//increase the width of the filter region to remove blur "boundary"
+		.attr("x", "-100%") //make sure the center of the "width" lies in the middle
 		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("in","SourceGraphic")
@@ -71,6 +73,10 @@ pt.fuzzyCode.init = function() {
 		.enter().append("filter")
 		.attr("class", "flyCircleFilters")
 		.attr("id",function(d,i) { return "fuzzy-"+i; })
+		.attr("width", "300%")	//increase the width of the filter region to remove blur "boundary"
+		.attr("x", "-100%") //make sure the center of the "width" lies in the middle
+		.attr("height", "200%")
+		.attr("y", "-50%")
 		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("class", "blurValues")
@@ -81,21 +87,16 @@ pt.fuzzyCode.init = function() {
 	///////////////////////// Create example circles //////////////////////////
 	///////////////////////////////////////////////////////////////////////////	
 
-	var exampleCircle = svg.selectAll(".fuzzRangeWrapper")
+	//Create set of example circles along a vertical with increasing motion blur applied
+	var exampleCircleWrapper = svg.append("g").attr("class", "exampleCirclerWapper");
+	var exampleCircles = exampleCircleWrapper.selectAll(".rangeExamples")
 		.data(fuzzRanges)
-		.enter().append("g")
-		.attr("class", "fuzzRangeWrapper")
-		.attr("transform", function(d,i) { return "translate(" + 0 + "," + (-height*0.8/2 + i*height*0.8/(fuzzRanges.length-1)) + ")"; })
-		.style("filter", function(d,i) { return "url(#fuzzy-range-" + i + ")"; });
-	
-	//White circle below
-	exampleCircle.append("circle")
-		.attr("r", 35)
-		.style("fill", "white");
-	//"Visible" green circle on top
-	exampleCircle.append("circle")
+		.enter().append("circle")
+		.attr("class", "rangeExamples")
+		.attr("cy", function(d,i) { return -height*0.8/2 + i*height*0.8/(fuzzRanges.length-1); })
 		.attr("r", 16)
-		.style("fill", color);
+		.style("fill", color)
+		.style("filter", function(d,i) { return "url(#fuzzy-range-" + i + ")"; });
 
 	///////////////////////////////////////////////////////////////////////////
 	//////////////////////// Create fly out circles ///////////////////////////
@@ -113,32 +114,19 @@ pt.fuzzyCode.init = function() {
         .style("text-anchor", "middle")
         .text("With motion blur filter");
 
-	//Set up the circle wrapper (pink/white)
 	//Since we can only do a blur in the x and y direction the group should be rotated
 	//so the coordinated system turns along with the direction the circle
 	//will be flying out from
-	pt.fuzzyCode.flyCircles = circleWrapper.selectAll(".flyCircleWrapper")
+	pt.fuzzyCode.flyCircles = circleWrapper.selectAll(".flyCircle")
 		.data(flyCircleData)
-		.enter().append("g")
-		.attr("class", "flyCircleWrapper")
-		.attr("transform", function(d,i) { return "rotate(" + (d.fixedAngle*180/Math.PI - 90) + ")"; })
-		.style("filter", function(d,i) { return "url(#fuzzy-"+i+")"; });
-
-	//A circle behind the pink ones so that the area of the circle is bigger 
-	//than just the pink circle. Otherwise you see borders around the pink circle
-	pt.fuzzyCode.flyCircles.append("circle")
-		.attr("cx", 0)
-		.attr("cy", 0)
-		.attr("r", 25)
-		.style("fill", "white");
-
-	//The pink circles
-	pt.fuzzyCode.flyCircles.append("circle")
+		.enter().append("circle")
 		.attr("class", "flyCircle")
+		.attr("transform", function(d,i) { return "rotate(" + (d.fixedAngle*180/Math.PI - 90) + ")"; })
 		.attr("cx", 0)
 		.attr("cy", 0)
 		.attr("r", 12)
-		.style("fill", color);
+		.style("fill", color)
+		.style("filter", function(d,i) { return "url(#fuzzy-"+i+")"; });
 
 	//Append circle at center
 	circleWrapper.append("circle")
@@ -159,7 +147,7 @@ pt.fuzzyCode.init = function() {
 pt.fuzzyCode.showExample = function() {
 
 	//Show the example circles
-	d3.selectAll("#fuzzyCode .fuzzRangeWrapper")
+	d3.selectAll("#fuzzyCode .exampleCirclerWapper")
 		.transition().duration(500)
 		.style("opacity", 1);
 
@@ -184,7 +172,7 @@ pt.fuzzyCode.noFuzzy = function() {
 	if(pt.fuzzyCode.previousStep === "showExample") pt.fuzzyCode.repeat();
 
 	//Hide the example circles
-	d3.selectAll("#fuzzyCode .fuzzRangeWrapper")
+	d3.selectAll("#fuzzyCode .exampleCirclerWapper")
 		.transition().duration(500)
 		.style("opacity", 0);
 
@@ -198,7 +186,7 @@ pt.fuzzyCode.noFuzzy = function() {
         .text("Without motion blur filter");
 
 	//Remove filter from the circle wrapper
-	d3.selectAll("#fuzzyCode .flyCircleWrapper")
+	d3.selectAll("#fuzzyCode .flyCircle")
 		.style("filter", "none");
 
 	pt.fuzzyCode.previousStep = "noFuzzyFilter";
@@ -219,7 +207,7 @@ pt.fuzzyCode.fuzzy = function() {
 	}//if
 
 	//Hide the example circles (in case you move backward)
-	d3.selectAll("#fuzzyCode .fuzzRangeWrapper")
+	d3.selectAll("#fuzzyCode .exampleCirclerWapper")
 		.transition().duration(500)
 		.style("opacity", 0);
 
@@ -233,7 +221,7 @@ pt.fuzzyCode.fuzzy = function() {
         .text("With motion blur filter");
 
 	//Put filter back on circle wrappers
-	d3.selectAll("#fuzzyCode .flyCircleWrapper")
+	d3.selectAll("#fuzzyCode .flyCircle")
 		.style("filter", function(d,i) { return "url(#fuzzy-"+i+")"; });
 
 	pt.fuzzyCode.previousStep = "fuzzyFilter";

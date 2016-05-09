@@ -95,6 +95,8 @@ pt.fuzzyIntro.init = function() {
 		.data(randStart)
 		.enter().append("filter")
 		.attr("id",function(d,i) { return "fuzzy-" + d.id; })
+		.attr("width", "600%")	//increase the width of the filter region to remove blur "boundary"
+		.attr("x", "-250%") //make sure the center of the "width" lies in the middle
 		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("class", "blurValues")
@@ -118,34 +120,21 @@ pt.fuzzyIntro.init = function() {
 		.append("g")
 		.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")");
 
-	//Outer group wrapper for a fixed y location
-	var circleWrapperOuter = circleWrapperClip.selectAll(".circleWrapperOuter")
+	//Group wrapper for a fixed y location
+	var circleWrapper = circleWrapperClip.selectAll(".circleWrapper")
     	.data(randStart)
     	.enter().append("g")
-    	.attr("class", ".circleWrapperOuter")
+    	.attr("class", ".circleWrapper")
     	.attr("transform", function(d) { return "translate(" + 0 + "," + d.yLoc + ")" ;})
     	.style("opacity", 0);
 
-    //Group wrapper for the rect and circle - set motion blur filter 
-    circleGroups = circleWrapperOuter.append("g")
-    	.attr("class", "circleGroups")
-    	.attr("transform", function(d) { return "translate(" + d.xLoc + ",0)" ;})
-    	.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
-
-    //Append rect behind the visible circles so the circles have a large enough "bleed" area
-    circleGroups.append("rect")
-		.attr("class", "rectBottom")
-		.attr("x", -radius*2)
-		.attr("y", -radius)
-		.attr("width", radius*4)
-		.attr("height", radius*2)
-		.style("fill", "white");
-
 	//Finally append the visible circles
-    var circles = circleGroups.append("circle")
+    var circles = circleWrapper.append("circle")
     	.attr("class", "circles")
+    	.attr("cx", function(d) { return d.xLoc; })
       	.attr("r", 0)
-      	.style("fill", function(d,i) { return pt.fuzzyIntro.colorScale(i); });
+      	.style("fill", function(d,i) { return pt.fuzzyIntro.colorScale(i); })
+      	.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
 
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////// Place Hexagon in center /////////////////////////
@@ -164,16 +153,16 @@ pt.fuzzyIntro.init = function() {
 	///////////////////////////////////////////////////////////////////////////	
 
     //Better overlap with colored background of previous slide (spirograph)
-    circleWrapperOuter.transition().duration(1500)
+    circleWrapper.transition().duration(1500)
 		.style("opacity", 1);
 
     //Let the circles grow at the start
-    circles.transition().duration(pt.fuzzyIntro.dur)
+    circles.transition("grow").duration(pt.fuzzyIntro.dur)
      	.delay(function(d,i) { return i * pt.fuzzyIntro.delay*2; })
      	.attr("r", radius);
 
     //Initialize the chain of movement
-	circleGroups.transition().duration(pt.fuzzyIntro.dur)
+	circles.transition("move").duration(pt.fuzzyIntro.dur)
 	    .delay(function(d,i) { return i * pt.fuzzyIntro.delay; })
 	    .each(slide);
 
@@ -183,16 +172,16 @@ pt.fuzzyIntro.init = function() {
 
 	//Function based on http://blockbuilder.org/mbostock/1125997
 	function slide(d) {
-		var group = d3.select(this);
+		var circle = d3.select(this);
 		var element = d;
 		(function repeat() {
 
 			if(pt.fuzzyIntro.stopRepeat) return;
 
-		    group = group.transition().duration(pt.fuzzyIntro.dur)
-		        .attr("transform", "translate(" + -1*element.xLoc + ",0)")
+		    circle = circle.transition().duration(pt.fuzzyIntro.dur)
+		        .attr("cx",  -1*element.xLoc)
 		      .transition().duration(pt.fuzzyIntro.dur)
-		        .attr("transform", "translate(" + element.xLoc + ",0)")
+		        .attr("cx",  element.xLoc)
 		        .each("end", repeat);
 
 		    //Interpolate the fuzzyness

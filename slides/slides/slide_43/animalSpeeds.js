@@ -61,6 +61,8 @@ pt.animalSpeeds.init = function() {
 		.data(animals)
 		.enter().append("filter")
 		.attr("id",function(d,i) { return "fuzzy-" + d.id; })
+		.attr("width", "500%")	//increase the width of the filter region to remove blur "boundary"
+		.attr("x", "-200%") //make sure the center of the "width" lies in the middle
 		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("class", function(d,i) { return "blurValues"; })
@@ -168,25 +170,11 @@ pt.animalSpeeds.init = function() {
 		.style("opacity", 0);
 	
 	//Set up the circle wrapper
-	animalGroupsOuter = animalCircleWrapper.selectAll(".animalGroupsOuter")
+	var animalGroups = animalCircleWrapper.selectAll(".animalGroups")
 		.data(animals)
 		.enter().append("g")
-		.attr("class", "animalGroupsOuter")
+		.attr("class", "animalGroups")
 		.attr("transform", function(d,i) { return "translate(0," + i*(height/animals.length) + ")"; })
-		//.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
-
-	animalGroups = animalGroupsOuter.append("g")
-		.attr("class", "animalGroups");
-
-	//A circle behind the green ones so that the area of the circle is bigger 
-	//than just the green circle. Otherwise you see borders around the green circle
-	animalGroups.append("rect")
-		.attr("class", "animalRectBottom")
-		.attr("x", -pt.animalSpeeds.ImageWidth*1.5/2)
-		.attr("y", -pt.animalSpeeds.ImageWidth/2)
-		.attr("width", pt.animalSpeeds.ImageWidth*1.5)
-		.attr("height", pt.animalSpeeds.ImageWidth)
-		.style("fill", "white");
 
 	animalGroups.append("circle")
 		.attr("class", "animalCircle")
@@ -194,6 +182,7 @@ pt.animalSpeeds.init = function() {
 		.attr("cy", 0)
 		.attr("r", 0)
 		.style("fill", "#F92672")
+		.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
 
 	animalGroups.append("image")
 		.attr("class", "animalImage")
@@ -202,7 +191,8 @@ pt.animalSpeeds.init = function() {
 		.attr("y", -pt.animalSpeeds.ImageWidth/2)
 		.attr("width", pt.animalSpeeds.ImageWidth)
 		.attr("height", pt.animalSpeeds.ImageWidth)
-		.attr("text-anchor", "middle");
+		.attr("text-anchor", "middle")
+		.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
 
 	pt.animalSpeeds.direction = "forward";
 }//init
@@ -214,21 +204,15 @@ pt.animalSpeeds.setInPlace = function() {
 		.transition("show").duration(1000).delay(500)
 		.style("opacity", 1);
 
-	d3.selectAll("#animalSpeeds .animalGroups")
-		.transition("moveIn").duration(500)
-		.attr("transform", "translate(0,0)");
-
 	d3.selectAll("#animalSpeeds .animalCircle")
-		.transition("changeRadius").duration(0)
+		.transition("changeRadius").duration(500)
+		.attr("cx", 0)
 		.attr("r", pt.animalSpeeds.ImageWidth/4);
 
 	d3.selectAll("#animalSpeeds .animalImage")
-		.transition("changeOpacity").duration(0)
+		.transition("changeOpacity").duration(500)
+		.attr("x", -pt.animalSpeeds.ImageWidth/2)
 		.style("opacity", 0);	
-		
-	//For Firefox, remove the filter for a while
-	d3.selectAll(".animalGroupsOuter")
-		.style("filter", "none");
 
 }//setInPlace
 
@@ -259,11 +243,16 @@ pt.animalSpeeds.fuzzyInPlace = function() {
 		  	});
 
 		//Move back in
-		d3.selectAll("#animalSpeeds .animalGroups")
+		d3.selectAll("#animalSpeeds .animalCircle")
 			.transition("moveIn").duration(dur)
 			.delay(function(d,i) { return d.id*del; })
-			.attr("transform", "translate(0,0)")
+			.attr("cx", 0)
 			.call(endall, onlyChangeFuzzy);
+			
+		d3.selectAll("#animalSpeeds .animalImage")
+			.transition("moveInImage").duration(dur)
+			.delay(function(d,i) { return d.id*del; })
+			.attr("x", -pt.animalSpeeds.ImageWidth/2)
 
 	} else {
 		onlyChangeFuzzy();
@@ -293,23 +282,19 @@ pt.animalSpeeds.fuzzyInPlace = function() {
 			    };
 		  	});
 	}//onlyChangeFuzzy
-
-
-
+	
 }//fuzzyInPlace
 
 pt.animalSpeeds.switchImage = function() {
-	
-	d3.selectAll("#animalSpeeds .animalGroups")
-		.transition("moveIn").duration(1000)
-		.attr("transform", "translate(0,0)");
 
 	d3.selectAll("#animalSpeeds .animalCircle")
-		.transition("changeRadius").duration(700)
+		.transition("changeRadius").duration(1000)
+		.attr("cx", 0)
 		.attr("r", pt.animalSpeeds.direction === "forward" ? 0 : pt.animalSpeeds.ImageWidth/4);
 
 	d3.selectAll("#animalSpeeds .animalImage")
-		.transition("changeOpacity").duration(1000).delay(500)
+		.transition("changeOpacity").duration(1000)
+		.attr("x", -pt.animalSpeeds.ImageWidth/2)
 		.style("opacity", pt.animalSpeeds.direction === "forward" ? 1 : 0);		
 
 }//switchImage
@@ -321,10 +306,6 @@ pt.animalSpeeds.flyOut = function(direction) {
 	var dur = 1500,
 		del = 100;
 
-	//Set filter on the group elements
-	d3.selectAll(".animalGroupsOuter")
-		.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
-		
 	//In case you move backward
 	if(pt.animalSpeeds.direction === "backward") {
 		d3.selectAll("#animalSpeeds .animalCircleWrapper")
@@ -360,11 +341,16 @@ pt.animalSpeeds.flyOut = function(direction) {
 		    };
 	  	});
 
-	d3.selectAll("#animalSpeeds .animalGroups")
+	d3.selectAll("#animalSpeeds .animalCircle")
 		.transition("moveOut")
 		.duration(dur)
 		//.delay(function(d,i) { return d.id*del; })
-		//.ease("exp")
-		.attr("transform", function(d,i) { return "translate(" + pt.animalSpeeds.kmScale(d.speed) + ",0)"; });
+		.attr("cx", function(d,i) { return pt.animalSpeeds.kmScale(d.speed); });
+		
+	d3.selectAll("#animalSpeeds .animalImage")
+		.transition("moveOutImage")
+		.duration(dur)
+		//.delay(function(d,i) { return d.id*del; })
+		.attr("x", function(d,i) { return pt.animalSpeeds.kmScale(d.speed) - pt.animalSpeeds.ImageWidth/2; });
 
 }//flyOut
