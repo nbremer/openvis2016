@@ -244,43 +244,19 @@ pt.fuzzyCode.repeat = function() {
 	var dur = 1000,
 		del = 500;	
 	
-	//Interpolate the fuzzyness
+	//Interpolate the motion blur settings
 	d3.selectAll("#fuzzyCode .blurValues")
 		.transition().duration(dur*0.1)
 		.delay(function(d,i) { return i*del; })
-		.attrTween("stdDeviation", function(d,i) {
-    		var interpolate = d3.interpolate(0, 9);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return value + " 0";
-		    };
-	  	})
-	  	.transition().duration(dur*0.2)
-	  	.attrTween("stdDeviation", function(d) {
-    		var interpolate = d3.interpolate(9, 0);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return value + " 0";
-		    };
-	  	})
+		.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", "9 0"); })
+		.transition().duration(dur*0.2)
+		.attrTween("stdDeviation", function() { return d3.interpolateString("9 0", "0 0"); })
 		.transition().duration(dur*0.4) //Another one for the circles moving back in
 		.delay(function(d,i) { return pt.fuzzyCode.steps*del + i*del; })
-		.attrTween("stdDeviation", function(d,i) {
-    		var interpolate = d3.interpolate(0, 9);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return value + " 0";
-		    };
-	  	})
-	  	.transition().duration(dur*0.3)
-	  	.attrTween("stdDeviation", function(d) {
-    		var interpolate = d3.interpolate(9, 0);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return value + " 0";
-		    };
-	  	});
-
+		.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", "9 0"); })
+		.transition().duration(dur*0.3)
+		.attrTween("stdDeviation", function() { return d3.interpolateString("9 0", "0 0"); });
+				  
 	//Move circles in an out
 	d3.selectAll("#fuzzyCode .flyCircle")
 		.transition("flyOut").duration(dur)

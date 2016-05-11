@@ -184,42 +184,18 @@ pt.fuzzyIntro.init = function() {
 		        .attr("cx",  element.xLoc)
 		        .each("end", repeat);
 
-		    //Interpolate the fuzzyness
+			//Interpolate the motion blur settings
 			d3.selectAll("#introFuzzy #fuzzy-" + element.id + " .blurValues")
 				.transition().duration(pt.fuzzyIntro.dur*0.3) //Move right
 				.delay(200)
-				.attrTween("stdDeviation", function(d,i) {
-		    		var interpolate = d3.interpolate(0, element.maxValue);
-				    return function(t) {
-				      	var value = interpolate(t);
-				      	return value + " 0";
-				    };
-			  	})
-			  	.transition().duration(pt.fuzzyIntro.dur*0.3)
-			  	.attrTween("stdDeviation", function(d) {
-		    		var interpolate = d3.interpolate(element.maxValue, 0);
-				    return function(t) {
-				      	var value = interpolate(t);
-				      	return value + " 0";
-				    };
-			  	})
-			  	.transition().duration(pt.fuzzyIntro.dur*0.3) //Move left
+				.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", element.maxValue+" 0"); })
+				.transition().duration(pt.fuzzyIntro.dur*0.3)
+				.attrTween("stdDeviation", function() { return d3.interpolateString(element.maxValue + " 0", "0 0"); })
+				.transition().duration(pt.fuzzyIntro.dur*0.3) //Move left
 				.delay(pt.fuzzyIntro.dur + 200)
-				.attrTween("stdDeviation", function(d,i) {
-		    		var interpolate = d3.interpolate(0, element.maxValue);
-				    return function(t) {
-				      	var value = interpolate(t);
-				      	return value + " 0";
-				    };
-			  	})
-			  	.transition().duration(pt.fuzzyIntro.dur*0.3)
-			  	.attrTween("stdDeviation", function(d) {
-		    		var interpolate = d3.interpolate(element.maxValue, 0);
-				    return function(t) {
-				      	var value = interpolate(t);
-				      	return value + " 0";
-				    };
-			  	});
+				.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", element.maxValue+" 0"); })
+				.transition().duration(pt.fuzzyIntro.dur*0.3)
+				.attrTween("stdDeviation", function() { return d3.interpolateString(element.maxValue + " 0", "0 0"); });
 		})();
 	}//slide
 

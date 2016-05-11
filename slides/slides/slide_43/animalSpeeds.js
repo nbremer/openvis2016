@@ -221,26 +221,14 @@ pt.animalSpeeds.fuzzyInPlace = function() {
 	if(pt.animalSpeeds.direction === "forward") {
 		var dur = 1000,
 			del = 100;	
-
-		//Inward movement
-		d3.selectAll("#animalSpeeds .blurValues")
-		  	.transition("fuzzyIn").duration(dur*0.4) 
+			
+		//Interpolate the motion blur settings
+		d3.selectAll("#animalSpeeds  .blurValues")
+			.transition("fuzzyIn").duration(dur*0.4)
 			.delay(function(d,i) { return (i+1)*del + 200; })
-			.attrTween("stdDeviation", function(d,i) {
-	    		var interpolate = d3.interpolate(0, d.maxValue);
-			    return function(t) {
-			      	var value = interpolate(t);
-			      	return value + " 0";
-			    };
-		  	})
-		  	.transition("fuzzyOut").duration(dur*0.2)
-		  	.attrTween("stdDeviation", function(d) {
-	    		var interpolate = d3.interpolate(d.maxValue, 0);
-			    return function(t) {
-			      	var value = interpolate(t);
-			      	return value + " 0";
-			    };
-		  	});
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString("0 0", d.maxValue+" 0"); })
+			.transition("fuzzyOut").duration(dur*0.2)
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0 0"); });
 
 		//Move back in
 		d3.selectAll("#animalSpeeds .animalCircle")
@@ -262,25 +250,14 @@ pt.animalSpeeds.fuzzyInPlace = function() {
 		var dur = 1500,
 			del = 400;	
 
-		//Interpolate the fuzzyness
-		d3.selectAll("#animalSpeeds .blurValues")
+		//Interpolate the motion blur settings
+		d3.selectAll("#animalSpeeds  .blurValues")
 			.transition("fuzzyIn").duration(dur*0.4)
 			.delay(function(d,i) { return i*del + 200; })
-			.attrTween("stdDeviation", function(d,i) {
-	    		var interpolate = d3.interpolate(0, d.maxValue);
-			    return function(t) {
-			      	var value = interpolate(t);
-			      	return value + " 0";
-			    };
-		  	})
-		  	.transition("fuzzyOut").duration(dur*0.3)
-		  	.attrTween("stdDeviation", function(d) {
-	    		var interpolate = d3.interpolate(d.maxValue, 0);
-			    return function(t) {
-			      	var value = interpolate(t);
-			      	return value + " 0";
-			    };
-		  	});
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString("0 0", d.maxValue+" 0"); })
+			.transition("fuzzyOut").duration(dur*0.3)
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0 0"); });
+			
 	}//onlyChangeFuzzy
 	
 }//fuzzyInPlace
@@ -319,34 +296,25 @@ pt.animalSpeeds.flyOut = function(direction) {
 			.style("opacity", 1);	
 	}//if
 
-	//Interpolate the fuzzyness
-	d3.selectAll("#animalSpeeds .blurValues")
+	//Interpolate the motion blur settings
+	d3.selectAll("#animalSpeeds  .blurValues")
 		.transition("fuzzyIn").duration(dur*0.4) //Outward movement
-		//.delay(function(d,i) { return (i+1)*del + 200; })
+		//.delay(function(d,i) { return (i+1)*100 + 200; })
 		.delay(200)
-		.attrTween("stdDeviation", function(d,i) {
+		.attrTween("stdDeviation", function(d) { 
 			d.maxValue = d.speed * 12 / pt.animalSpeeds.maxSpeed;
-    		var interpolate = d3.interpolate(0, d.maxValue);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return value + " 0";
-		    };
-	  	})
-	  	.transition("fuzzyOut").duration(dur*0.3)
-	  	.attrTween("stdDeviation", function(d) {
-    		var interpolate = d3.interpolate(d.maxValue, 0);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return value + " 0";
-		    };
-	  	});
-
+			return d3.interpolateString("0 0", d.maxValue+" 0"); 
+		})
+		.transition("fuzzyOut").duration(dur*0.3)
+		.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0 0"); });
+   
+	//Move the circles outward
 	d3.selectAll("#animalSpeeds .animalCircle")
 		.transition("moveOut")
 		.duration(dur)
 		//.delay(function(d,i) { return d.id*del; })
 		.attr("cx", function(d,i) { return pt.animalSpeeds.kmScale(d.speed); });
-		
+	//Move the images outward
 	d3.selectAll("#animalSpeeds .animalImage")
 		.transition("moveOutImage")
 		.duration(dur)
