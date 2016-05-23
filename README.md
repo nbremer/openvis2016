@@ -10,6 +10,8 @@ Tested with Chrome, Firefox and Safari. Definitely meant to be seen in Chrome. E
 
 [SVGs beyond mere shapes](http://nbremer.github.io/openvis2016/slides)
 
+[Watch the video of the presentation itself](https://youtu.be/AwlA3SaChHE) that Bocoup made available
+
 [![SVGs beyond mere shapes - slides](img/SVG beyond mere shapes - Title slide.png "SVGs beyond mere shapes - slides")](http://nbremer.github.io/openvis2016/slides)
 
 #####Notes
