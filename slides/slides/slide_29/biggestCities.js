@@ -129,7 +129,7 @@ pt.biggestCities.init = function() {
 	populations.forEach(function(d,i) {
 			d.radius = pt.biggestCities.rScale(d.population);
 			d.x = projection([d.longitude, d.latitude])[0];
-			d.y = projection([d.longitude, d.latitude])[0];
+			d.y = projection([d.longitude, d.latitude])[1];
 	});
 
 	//Wrapper for the cities
@@ -224,13 +224,10 @@ pt.biggestCities.flyOut = function () {
 	if(pt.biggestCities.previousStep === "placeCities") {
 		d3.selectAll("#biggestCities .blurValues")
 			.transition().duration(3000)
-	      	.attrTween("values", function(d) {
-		    	var interpolate = d3.interpolate(6, 18);
-			    return function(t) {
-			      	var value = interpolate(t);
-			      	return "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 " + value + " -5"; ;
-			    };
-	  		});
+			.attrTween("values", function() { 
+				return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5", 
+											"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5"); 
+			});
     }//if
 
    	//Make the cover cirlce to its true size again
@@ -293,13 +290,10 @@ pt.biggestCities.placeCities = function () {
 	//Remove gooey filter from cities
 	d3.selectAll("#biggestCities .blurValues")
 		.transition().duration(pt.biggestCities.previousStep === "flyOut" ? 4000 : 2000)
-      	.attrTween("values", function(d) {
-	    	var interpolate = d3.interpolate(18, 6);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 " + value + " -5";
-		    };
-	 	})
+		.attrTween("values", function() { 
+			return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -5", 
+										"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5"); 
+		})
 	 	.call(endall, function() {
 	 		pt.biggestCities.previousStep = "placeCities";
 	 	});
@@ -345,13 +339,10 @@ pt.biggestCities.clusterCountry = function() {
 	//Reset gooey filter values
    	d3.selectAll("#biggestCities .blurValues")
 		.transition().duration(2000)
-      	.attrTween("values", function(d) {
-	    	var interpolate = d3.interpolate(6, 25);
-		    return function(t) {
-		      	var value = interpolate(t);
-		      	return "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 " + value + " -5"; ;
-		    };
-	  	})
+		.attrTween("values", function() { 
+			return d3.interpolateString("1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 6 -5", 
+										"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -5"); 
+		})
       	.call(endall, function() {
 	 		pt.biggestCities.previousStep = "clusterCountry";
 	 	});

@@ -168,8 +168,10 @@ pt.orientationFinal.init = function() {
 	////////////////////////////////////////////////////////////
 
 	//Loop through the different avengers
+	var counter  = 0;
 	function loop() {
-		var chosenChord = Math.round(Math.random() * (chord.groups().length-1));
+		var chosenChord = counter % chord.groups().length; //Math.round(Math.random() * (chord.groups().length-1));
+		counter+=1;
 		//Hide all none chosen chords and make the chosen chord more apperant
 		svg.selectAll("path.chord")
 			.transition().duration(1500)

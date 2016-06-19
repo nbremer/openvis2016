@@ -61,19 +61,19 @@ pt.fuzzyIntro.init = function() {
 		} else if(h > -hexHeight/4 && h < hexHeight/4) {
 			var w = -hexWidth/2 + 1.4*radius;
 		} else if (h >= hexHeight/4) {
-			var w = (h - hexRadius)*SQRT3 + 2.6*radius;;
+			var w = (h - hexRadius)*SQRT3 + 2.6*radius;
 		}//else if
 
 		randStart.push({
 			id: i,
 			yLoc: h,
 			xLoc: w,
-			maxValue: -6 * w/maxMove //The extent of the blur depends on the distance to cross. Less distance is less blur
+			maxValue: -8 * w/maxMove //The extent of the blur depends on the distance to cross. Less distance is less blur
 		});
 	}//for i
 
 	pt.fuzzyIntro.delay = 50;
-	pt.fuzzyIntro.dur = 900;
+	pt.fuzzyIntro.dur = 1000;
 
 	//var colors = ['#261c21','#6a224c','#b3274d','#db5b2d','#eb9605'];
 	//var colors = ["#3FB8AF","#7FC7AF","#DAD8A7","#FF9E9D","#FF3D7F"];
@@ -144,7 +144,7 @@ pt.fuzzyIntro.init = function() {
 	svg.append("path")
 		.attr("class", "hexagon")
 		.attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath)
-		.style("stroke", "#F2F2F2")
+		.style("stroke", "#bfbfbf")
 		.style("stroke-width", "7px")
 		.style("fill", "none");
 
