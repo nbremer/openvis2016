@@ -70,7 +70,9 @@ pt.fuzzyIntro.init = function() {
 			xLoc: w,
 			maxValue: -8 * w/maxMove //The extent of the blur depends on the distance to cross. Less distance is less blur
 		});
-	}//for i
+    }//for i
+    
+    // randStart = randStart.slice(0,1)
 
 	pt.fuzzyIntro.delay = 50;
 	pt.fuzzyIntro.dur = 1000;
@@ -101,7 +103,7 @@ pt.fuzzyIntro.init = function() {
 		.append("feGaussianBlur")
 		.attr("class", "blurValues")
 		.attr("in","SourceGraphic")
-		.attr("stdDeviation","0,0");
+		.attr("stdDeviation","0.1 0");
 
 	//Create a clip path that is the same as the top hexagon
 	svg.append("clipPath")
@@ -131,7 +133,7 @@ pt.fuzzyIntro.init = function() {
 	//Finally append the visible circles
     var circles = circleWrapper.append("circle")
     	.attr("class", "circles")
-    	.attr("cx", function(d) { return d.xLoc; })
+    	.attr("cx", d => d.xLoc)
       	.attr("r", 0)
       	.style("fill", function(d,i) { return pt.fuzzyIntro.colorScale(i); })
       	.style("filter", function(d,i) { return "url(#fuzzy-" + d.id + ")"; });
@@ -157,46 +159,81 @@ pt.fuzzyIntro.init = function() {
 		.style("opacity", 1);
 
     //Let the circles grow at the start
-    circles.transition("grow").duration(pt.fuzzyIntro.dur)
+    circles
+        .transition("grow").duration(pt.fuzzyIntro.dur)
      	.delay(function(d,i) { return i * pt.fuzzyIntro.delay*2; })
-     	.attr("r", radius);
-
-    //Initialize the chain of movement
-	circles.transition("move").duration(pt.fuzzyIntro.dur)
-	    .delay(function(d,i) { return i * pt.fuzzyIntro.delay; })
-	    .each(slide);
+         .attr("r", radius);
 
 	///////////////////////////////////////////////////////////////////////////
 	////////////////////// Circle movement inside hexagon /////////////////////
-	///////////////////////////////////////////////////////////////////////////	
+    ///////////////////////////////////////////////////////////////////////////	
+    
+    d5.selectAll(".circles").transition()
+        .duration(pt.fuzzyIntro.dur)
+        .delay((d,i) => i * pt.fuzzyIntro.delay)
+        .on("start", function repeat(d) {
 
-	//Function based on http://blockbuilder.org/mbostock/1125997
-	function slide(d) {
-		var circle = d3.select(this);
-		var element = d;
-		(function repeat() {
+            if (pt.fuzzyIntro.stopRepeat) return;
 
-			if(pt.fuzzyIntro.stopRepeat) return;
+            //Move the circles
+            d5.active(this)
+                .attr("cx", -1 * d.xLoc)
+                .transition().duration(pt.fuzzyIntro.dur)
+                .attr("cx", d.xLoc)
+                .transition().duration(pt.fuzzyIntro.dur)
+                .on("start", repeat)
 
-		    circle = circle.transition().duration(pt.fuzzyIntro.dur)
-		        .attr("cx",  -1*element.xLoc)
-		      .transition().duration(pt.fuzzyIntro.dur)
-		        .attr("cx",  element.xLoc)
-		        .each("end", repeat);
+            //Interpolate the motion blur settings
+            d5.selectAll("#introFuzzy #fuzzy-" + d.id + " .blurValues")
+                .transition("blur").duration(pt.fuzzyIntro.dur * 0.3) //Move right
+                .delay(200)
+                .attrTween("stdDeviation", () => d5.interpolateString("0.1 0", d.maxValue + " 0") )
+                .transition("blur").duration(pt.fuzzyIntro.dur * 0.3)
+                .attrTween("stdDeviation", () => d3.interpolateString(d.maxValue + " 0", "0.1 0") )
+                .transition("blur").duration(pt.fuzzyIntro.dur * 0.3) //Move left
+                .delay(pt.fuzzyIntro.dur + 200)
+                .attrTween("stdDeviation", () => d3.interpolateString("0.1 0", d.maxValue + " 0") )
+                .transition("blur").duration(pt.fuzzyIntro.dur * 0.3)
+                .attrTween("stdDeviation", () => d3.interpolateString(d.maxValue + " 0", "0.1 0") );
+        })//repeat
+    
+	// ///////////////////////////////////////////////////////////////////////////
+	// ////////////////////// Circle movement inside hexagon /////////////////////
+    // ///////////////////////////////////////////////////////////////////////////	
+    
+    // //Initialize the chain of movement
+	// circles.transition("move").duration(pt.fuzzyIntro.dur)
+	//     .delay(function(d,i) { return i * pt.fuzzyIntro.delay; })
+	//     .each(slide);
 
-			//Interpolate the motion blur settings
-			d3.selectAll("#introFuzzy #fuzzy-" + element.id + " .blurValues")
-				.transition().duration(pt.fuzzyIntro.dur*0.3) //Move right
-				.delay(200)
-				.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", element.maxValue+" 0"); })
-				.transition().duration(pt.fuzzyIntro.dur*0.3)
-				.attrTween("stdDeviation", function() { return d3.interpolateString(element.maxValue + " 0", "0 0"); })
-				.transition().duration(pt.fuzzyIntro.dur*0.3) //Move left
-				.delay(pt.fuzzyIntro.dur + 200)
-				.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", element.maxValue+" 0"); })
-				.transition().duration(pt.fuzzyIntro.dur*0.3)
-				.attrTween("stdDeviation", function() { return d3.interpolateString(element.maxValue + " 0", "0 0"); });
-		})();
-	}//slide
+
+	// //Function based on http://blockbuilder.org/mbostock/1125997
+	// function slide(d) {
+	// 	var circle = d3.select(this);
+	// 	var element = d;
+	// 	(function repeat() {
+
+	// 		if(pt.fuzzyIntro.stopRepeat) return;
+
+	// 	    circle = circle.transition().duration(pt.fuzzyIntro.dur)
+	// 	        .attr("cx",  -1*element.xLoc)
+	// 	      .transition().duration(pt.fuzzyIntro.dur)
+	// 	        .attr("cx",  element.xLoc)
+	// 	        .each("end", repeat);
+
+	// 		// //Interpolate the motion blur settings
+	// 		// d3.selectAll("#introFuzzy #fuzzy-" + element.id + " .blurValues")
+	// 		// 	.transition().duration(pt.fuzzyIntro.dur*0.3) //Move right
+	// 		// 	.delay(200)
+	// 		// 	.attrTween("stdDeviation", function() { return d3.interpolateString("0.1 0", element.maxValue+" 0"); })
+	// 		// 	.transition().duration(pt.fuzzyIntro.dur*0.3)
+	// 		// 	.attrTween("stdDeviation", function() { return d3.interpolateString(element.maxValue + " 0", "0.1 0"); })
+	// 		// 	.transition().duration(pt.fuzzyIntro.dur*0.3) //Move left
+	// 		// 	.delay(pt.fuzzyIntro.dur + 200)
+	// 		// 	.attrTween("stdDeviation", function() { return d3.interpolateString("0.1 0", element.maxValue+" 0"); })
+	// 		// 	.transition().duration(pt.fuzzyIntro.dur*0.3)
+	// 		// 	.attrTween("stdDeviation", function() { return d3.interpolateString(element.maxValue + " 0", "0.1 0"); });
+	// 	})();
+	// }//slide
 
 }//init

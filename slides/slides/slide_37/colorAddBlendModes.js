@@ -103,5 +103,44 @@ pt.colorAddBlendModes.init = function() {
 
 }//init
 
+pt.colorAddBlendModes.isolate = function() {
+	d3.selectAll("#colorAdd-blend-modes .screenWrapper, #colorAdd-blend-modes .multiplyWrapper")
+		.style("isolation", "isolate");
+	pt.colorAddBlendModes.updateCode("isolate");
+}//isolate
+
+pt.colorAddBlendModes.noIsolateWhite = function() {
+	d3.selectAll("#colorAdd-blend-modes .screenWrapper, #colorAdd-blend-modes .multiplyWrapper")
+		.style("isolation", "auto");
+	pt.colorAddBlendModes.updateCode("auto");
+	pt.colorAddBlendModes.updateBackground("white");
+}//noIsolateWhite
+
+pt.colorAddBlendModes.noIsolateBlack = function() {
+	d3.selectAll("#colorAdd-blend-modes .screenWrapper, #colorAdd-blend-modes .multiplyWrapper")
+		.style("isolation", "auto");
+	pt.colorAddBlendModes.updateCode("auto");
+	pt.colorAddBlendModes.updateBackground("black");
+}//noIsolateBlack
+
+pt.colorAddBlendModes.updateBackground = function(backgroundColor) {
+	//Update slide background
+	d3.select(".slide-background.stack.present").selectAll(".slide-background.present")
+		.style("background", backgroundColor);
+}//updateBackground
+
+pt.colorAddBlendModes.updateCode = function(isolateMode) {
+	//Update the text in the code block
+	d3.selectAll("#colorAdd-blend-modes pre code")
+		.html('/*Set isolate on the group element*/ <br>' + 
+				'.circleWrapper { isolation: ' + isolateMode + '; } <br><br>' +	
+				'/*Set blend mode on SVG element: e.g. screen, multiply*/ <br>' + 
+				'.circle { mix-blend-mode: screen;}')
+	//Update the code to its javascript highlight
+	$("#colorAdd-blend-modes pre code").each(function(i, block) {
+	   hljs.highlightBlock(block);
+	});
+}//updateCode
+
 
 

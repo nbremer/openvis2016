@@ -103,7 +103,7 @@ pt.legendCodeMulti.init = function() {
 
 }//init
 
-pt.legendCodeMulti.toBlack = function() {
+pt.legendCodeMulti.showHex = function() {
 
 	//Start with a black rectangle
 	d3.selectAll("#legendCodeMulti .exampleRect")
@@ -112,21 +112,21 @@ pt.legendCodeMulti.toBlack = function() {
 	//Hide hexagons (in case you move backwards)
 	d3.selectAll("#legendCodeMulti .hexagon")
 		.transition().duration(1000)
-		.style("opacity", 0);
+		.style("opacity", 1);
 
-}//hexOne
+}//showHex
 
-pt.legendCodeMulti.showHex = function() {
+pt.legendCodeMulti.toBlack = function() {
 
 	//Set back to black, in case you move backwards
 	d3.selectAll("#legendCodeMulti .exampleRect")
 		.style("fill", "black");
 
-	d3.selectAll("#legendCodeMulti .hexagon")
-		.transition().duration(1000)
-		.style("opacity", 1)
+	// d3.selectAll("#legendCodeMulti .hexagon")
+	// 	.transition().duration(1000)
+	// 	.style("opacity", 1);
 
-}//showHex
+}//toBlack
 
 pt.legendCodeMulti.fillRectMulti = function() {
 

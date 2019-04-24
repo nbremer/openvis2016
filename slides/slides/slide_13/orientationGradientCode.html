@@ -28,7 +28,7 @@ linearChordGradients
 	//...use the chord.chords() dataset to append a linear gradient for each chord
 	<span class="fragment" data-fragment-index="1">//Instead of the object bounding box, use the user coordinate system for setting locations
 	.attr("gradientUnits", "userSpaceOnUse")</span>
-	<span class="fragment" data-fragment-index="2">.attr("x1", function(d,i) { return source.x.location; }) //using d.source.startAngle & d.source.endAngle
+	<span class="fragment" data-fragment-index="2">.attr("x1", d => source.x.location ) //using d.source.startAngle & d.source.endAngle
 	//...do the same for y1, x2 and y2</span>
 	
 </code></pre>

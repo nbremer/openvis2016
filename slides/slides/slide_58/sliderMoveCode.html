@@ -30,7 +30,21 @@
 
 <section id="slider-move-code">
   <div id="sliderMoveCode"></div>
-  <span class="fragment"></span>
-  <span class="fragment"></span>
-  <span class="fragment"></span>
+
+  <span class="fragment" data-fragment-index="4"><pre><code class="language-javascript" data-noescape data-trim>
+.on("brush", function(d) {
+
+  /*Update the left "border"*/
+  d3.selectAll(".left").attr("offset", "40%");
+
+  /*Update the right "border"*/
+  d3.selectAll(".right").attr("offset", "60%");
+
+  /*...do other things...*/
+})
+  </code></pre>
+
+  <span class="fragment" data-fragment-index="1"></span>
+  <span class="fragment" data-fragment-index="2"></span>
+  <span class="fragment" data-fragment-index="3"></span>
 </section>

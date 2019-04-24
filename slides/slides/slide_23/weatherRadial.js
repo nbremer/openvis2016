@@ -1,7 +1,7 @@
 pt.weatherRadial = pt.weatherRadial || {};
 
 //Turn strings into actual numbers/dates
-weatherBoston.forEach(function(d) {
+weatherDaily.forEach(function(d) {
 	d.date = parseDate(d.date);
 });
 
@@ -42,20 +42,20 @@ pt.weatherRadial.init = function() {
 
 	//Base the color scale on average temperature extremes
 	var colorScale = d3.scale.linear()
-		.domain([-15, 7.5, 30])
+		.domain([-10, 10, 30])
 		.range(["#2c7bb6", "#ffff8c", "#d7191c"])
 		.interpolate(d3.interpolateHcl);
 
 	//Scale for the heights of the bar, not starting at zero to give the bars an initial offset outward
 	var barScale = d3.scale.linear()
 		.range([innerRadius, outerRadius])
-		.domain([-15,30]); 
+		.domain([-10,30]); 
 
 	//Scale to turn the date into an angle of 360 degrees in total
 	//With the first datapoint (Jan 1st) on top
 	var angle = d3.scale.linear()
 		.range([-180, 180])
-		.domain(d3.extent(weatherBoston, function(d) { return d.date; }));	 
+		.domain(d3.extent(weatherDaily, function(d) { return d.date; }));	 
 
 	///////////////////////////////////////////////////////////////////////////
 	//////////////////////////// Create Titles ////////////////////////////////
@@ -66,7 +66,7 @@ pt.weatherRadial.init = function() {
     	.attr("class", "title")
         .attr("x", -width/2)
         .attr("y", -10)
-        .text("Daily Temperatures in Boston");
+        .text("Daily Temperatures in New York");
     svg.append("text")
     	.attr("class", "subtitle")
         .attr("x", -width/2)
@@ -114,7 +114,7 @@ pt.weatherRadial.init = function() {
 	barWrapper.append("line")
 		.attr("class", "yearLine")
 		.attr("x1", 0)
-		.attr("y1", -innerRadius * 0.65)
+		.attr("y1", -outerRadius * 0.9)
 		.attr("x2", 0)
 		.attr("y2", -outerRadius * 1.1);
 
@@ -125,7 +125,7 @@ pt.weatherRadial.init = function() {
 	//Draw a bar per day were the height is the difference between the minimum and maximum temperature
 	//And the color is based on the mean temperature
  	barWrapper.selectAll(".tempBar")
-	 	.data(weatherBoston)
+	 	.data(weatherDaily)
 	 	.enter().append("rect")
 	 	.attr("class", "tempBar")
 	 	.attr("transform", function(d,i) { return "rotate(" + (angle(d.date)) + ")"; })
@@ -142,7 +142,7 @@ pt.weatherRadial.init = function() {
 
 	//Extra scale since the color scale is interpolated
 	var tempScale = d3.scale.linear()
-		.domain([-15, 30])
+		.domain([-10, 30])
 		.range([0, width]);
 
 	//Calculate the variables for the temp gradient
@@ -197,7 +197,7 @@ pt.weatherRadial.init = function() {
 	//Set scale for x-axis
 	var xScale = d3.scale.linear()
 		 .range([-legendWidth/2, legendWidth/2])
-		 .domain([-15,30] );
+		 .domain([-10,30] );
 
 	//Define x-axis
 	var xAxis = d3.svg.axis()

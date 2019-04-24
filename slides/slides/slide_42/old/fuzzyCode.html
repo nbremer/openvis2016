@@ -1,0 +1,41 @@
+<style>
+	#fuzzy-code .title {
+	    font-size: 36px;
+	    fill: #4F4F4F;
+	    font-weight: 300;
+	}
+
+	#fuzzy-code .credit {
+	    font-size: 14px;
+	    color: #AAAAAA;
+	    font-weight: 300;
+	}
+
+	#fuzzy-code .rangeExamplesText {
+		font-size: 22px;
+    	fill: #979797;
+    	font-weight: 300;
+	}
+</style>
+
+<section id="fuzzy-code">
+	<div id="fuzzyCode"></div>
+	<span class="fragment" data-fragment-index="1"></span>
+	<span class="fragment" data-fragment-index="2"></span>
+	<span class="fragment" data-fragment-index="3"></span>
+
+	<div class="fuzzyCodeSection">
+		<pre><code class="language-javascript" data-noescape data-trim>
+//The filter part of the motion blur effect
+filter.append("feGaussianBlur")
+	.attr("in","SourceGraphic")
+	.attr("stdDeviation","10,0"); //Blur in the "x,y" direction
+
+//Set the filter on the circles
+circle.style("filter", "url(#fuzzy)");
+		</code></pre>
+	</div>
+
+	<span class="credit">Motion blur filter code adjusted from Lucas Bebber's SVG modal demo</span>
+</section>
+

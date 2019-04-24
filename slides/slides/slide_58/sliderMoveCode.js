@@ -12,11 +12,11 @@ pt.sliderMoveCode.init = function() {
 	var margin = {
 		top: 70,
 		right: 30,
-		bottom: 140,
+		bottom: 100,
 		left: 30
 	};
 	var width = $(".slides").width()*0.9 - margin.left - margin.right;
-	var height = 330 - margin.top - margin.bottom;
+	var height = 290 - margin.top - margin.bottom;
 		
 	pt.sliderMoveCode.width = width;
 	pt.sliderMoveCode.height = height;
@@ -165,6 +165,20 @@ pt.sliderMoveCode.update = function() {
 	    d3.selectAll("#sliderMoveCode .left").attr("offset", startOffset + "%");
 		d3.selectAll("#sliderMoveCode .right").attr("offset",  endOffset + "%");
 
+		//Update the text in the code block
+		d3.selectAll("#slider-move-code pre code")
+			.html('.on("brush", function(d) { <br><br>' + 
+				'	/*Update the left gradient "border"*/ <br>' +
+			 	'	d3.selectAll(".left").attr("offset", "' + Math.round(startOffset) + '%");<br><br>' +
+			 	'	/*Update the right gradient "border"*/ <br>' + 
+			 	'	d3.selectAll(".right").attr("offset", "' + Math.round(endOffset) + '%");<br><br>' +
+			 	'  	/*...do other things...*/<br>' +
+				'})')
+		//Update the code to its javascript highlight
+		$("#slider-move-code pre code").each(function(i, block) {
+		   hljs.highlightBlock(block);
+		});
+
 	}//brushmove
 
 	function brushend() {
@@ -253,9 +267,9 @@ pt.sliderMoveCode.update = function() {
 
 	var textHeight = height+60;
 	stopText = [
-		{x: 0.35*width, y: textHeight, text:"grey stop", className: "firstStop"},
-		{x: 0.5*width, y: textHeight, text:"colored stop", className: "firstStop"},
-		{x: 0.65*width, y: textHeight, text:"grey stop", className: "secondStop"}
+		{x: 0.35*width, y: textHeight, text:"grey stop", className: "firstStop greyStop"},
+		{x: 0.5*width, y: textHeight, text:"colored stop", className: "firstStop coloredStop"},
+		{x: 0.65*width, y: textHeight, text:"grey stop", className: "secondStop greyStop"}
 	];
 
 	textWrapper.selectAll(".stopText")
@@ -284,10 +298,10 @@ pt.sliderMoveCode.update = function() {
 	    .style("fill", "#7F7F7F");
 
 	stopArrows = [
-		{x1: 0.35*width, x2: 0.4*width-5, className: "firstStop"},
-		{x1: 0.45*width, x2: 0.4*width+5, className: "firstStop"},
-		{x1: 0.55*width, x2: 0.6*width-5, className: "secondStop"},
-		{x1: 0.65*width, x2: 0.6*width+5, className: "secondStop"}
+		{x1: 0.35*width, x2: 0.4*width-5, className: "firstStop greyStop"},
+		{x1: 0.45*width, x2: 0.4*width+5, className: "firstStop coloredStop"},
+		{x1: 0.55*width, x2: 0.6*width-5, className: "secondStop coloredStop"},
+		{x1: 0.65*width, x2: 0.6*width+5, className: "secondStop greyStop"}
 	];
 	//Draw the line and arrowhead
 	textWrapper.selectAll(".stopArrow")
@@ -322,16 +336,32 @@ pt.sliderMoveCode.update = function() {
 	d3.selectAll("#sliderMoveCode .brush .resize.w").append("text")
 		.attr("class", "stopTextAbove left")
 		.attr("x", 0)
-		.attr("y", -15)
+		.attr("y", -35)
 		.style("text-anchor", "middle")
 		.text("40%");	
+
+	d3.selectAll("#sliderMoveCode .brush .resize.w").append("text")
+		.attr("class", "stopTextAbove left classText")
+		.attr("x", 0)
+		.attr("y", -12)
+		.style("font-size", 16)
+		.style("text-anchor", "middle")
+		.text('class="left"');	
 
 	d3.selectAll("#sliderMoveCode .brush .resize.e").append("text")
 		.attr("class", "stopTextAbove right")
 		.attr("x", 0)
-		.attr("y", -15)
+		.attr("y", -35)
 		.style("text-anchor", "middle")
 		.text("60%");
+
+	d3.selectAll("#sliderMoveCode .brush .resize.e").append("text")
+		.attr("class", "stopTextAbove right classText")
+		.attr("x", 0)
+		.attr("y", -12)
+		.style("font-size", 16)
+		.style("text-anchor", "middle")
+		.text('class="right"');	
 
 	////////////////////////////////////////////////////////////// 
 	////////////////////////// Start ///////////////////////////// 
@@ -349,19 +379,42 @@ pt.sliderMoveCode.update = function() {
 
 }//update
 
-pt.sliderMoveCode.hideArrows = function() {
+pt.sliderMoveCode.showFirstGrey = function() {
 
-	//Set the right offsets to 100% so it seems only the left offsets are there
+	//Set the left offset to 100% so it seems all grey
+	d3.selectAll("#sliderMoveCode .left")
+		.attr("offset", "100%");
 	d3.selectAll("#sliderMoveCode .right")
 		.attr("offset", "100%");
 
-	//Hide the second set of arrows, Hide the 60% label
-	d3.selectAll("#sliderMoveCode .secondStop, #sliderMoveCode .stopTextAbove.right")
+	//Hide the second set of arrows and colored stop, Hide the 60% label
+	d3.selectAll("#sliderMoveCode .secondStop, #sliderMoveCode .firstStop.coloredStop, #sliderMoveCode .stopTextAbove.right")
 		.style("opacity", 0);
 
-}//hideArrows
+}//showFirstGrey
 
-pt.sliderMoveCode.showArrows = function() {
+pt.sliderMoveCode.showFirstColored = function() {
+
+	//Reset the left offset
+	d3.selectAll("#sliderMoveCode .left")
+		.attr("offset", "40%");
+	//Set the right offset to 100% so it seems all colored after 40%
+	d3.selectAll("#sliderMoveCode .right")
+		.attr("offset", "100%");
+
+	//Show the left side of the colored stop
+	d3.selectAll("#sliderMoveCode .firstStop.coloredStop")
+		.transition().duration(500)
+		.style("opacity", 1);
+
+	//Hide (in case you move backward)
+	d3.selectAll("#sliderMoveCode .secondStop, #sliderMoveCode .stopTextAbove.right")
+		.transition().duration(500)
+		.style("opacity", 0);
+
+}//showFirstColored
+
+pt.sliderMoveCode.showSecondStop = function() {
 
 	//Hide the rect (in case you move backward)
 	d3.selectAll("#sliderMoveCode .gradRect")
@@ -377,7 +430,7 @@ pt.sliderMoveCode.showArrows = function() {
 	d3.selectAll("#sliderMoveCode .right")
 		.attr("offset", "60%");
 		
-}//showArrows
+}//showSecondStop
 
 pt.sliderMoveCode.showRect = function() {
 

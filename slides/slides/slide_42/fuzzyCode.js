@@ -27,6 +27,7 @@ pt.fuzzyCode.init = function() {
 		.attr("height", height + margin.top + margin.bottom);
 		
 	var svg = pt.fuzzyCode.svg.append("g")
+		//.style("filter", "url(#fuzzy)")
 		.attr("transform", "translate(" + (width/2 + margin.left) + "," +(height/2 +  margin.top) + ")");
 
 	var color = "#F92672";
@@ -62,6 +63,8 @@ pt.fuzzyCode.init = function() {
 		.attr("id",function(d,i) { return "fuzzy-range-"+i; })
 		.attr("width", "300%")	//increase the width of the filter region to remove blur "boundary"
 		.attr("x", "-100%") //make sure the center of the "width" lies in the middle
+		.attr("height", "150%")
+		.attr("y", "-25%")
 		.attr("color-interpolation-filters","sRGB") //to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
 		.append("feGaussianBlur")
 		.attr("in","SourceGraphic")
@@ -228,7 +231,6 @@ pt.fuzzyCode.fuzzy = function() {
 
 }//fuzzy
 
-
 //Continuously moves the circles outward and inward	
 pt.fuzzyCode.repeat = function() {
 
@@ -248,14 +250,14 @@ pt.fuzzyCode.repeat = function() {
 	d3.selectAll("#fuzzyCode .blurValues")
 		.transition().duration(dur*0.1)
 		.delay(function(d,i) { return i*del; })
-		.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", "9 0"); })
+		.attrTween("stdDeviation", function() { return d3.interpolateString("0.1 0", "9 0"); })
 		.transition().duration(dur*0.2)
-		.attrTween("stdDeviation", function() { return d3.interpolateString("9 0", "0 0"); })
+		.attrTween("stdDeviation", function() { return d3.interpolateString("9 0", "0.1 0"); })
 		.transition().duration(dur*0.4) //Another one for the circles moving back in
 		.delay(function(d,i) { return pt.fuzzyCode.steps*del + i*del; })
-		.attrTween("stdDeviation", function() { return d3.interpolateString("0 0", "9 0"); })
+		.attrTween("stdDeviation", function() { return d3.interpolateString("0.1 0", "9 0"); })
 		.transition().duration(dur*0.3)
-		.attrTween("stdDeviation", function() { return d3.interpolateString("9 0", "0 0"); });
+		.attrTween("stdDeviation", function() { return d3.interpolateString("9 0", "0.1 0"); });
 				  
 	//Move circles in an out
 	d3.selectAll("#fuzzyCode .flyCircle")
@@ -270,4 +272,3 @@ pt.fuzzyCode.repeat = function() {
 		.call(endall, pt.fuzzyCode.repeat);
 
 }//repeat
-

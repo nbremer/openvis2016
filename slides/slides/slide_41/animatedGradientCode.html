@@ -1,0 +1,40 @@
+<style>
+	#animated-gradient-code img {
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%,0%);
+		top: 0%;
+		/*width: 475px;*/
+		height: 375px;
+		margin: 0px !important;
+	}
+</style>
+
+<section id="animated-gradient-code">
+
+<div id="animatedGradientCode"></div>
+<span class="fragment" data-fragment-index="2"></span>
+
+<pre><code class="language-javascript" data-noescape data-trim>
+linearGradient
+	//...add location attributes
+	.attr("spreadMethod", "reflect") //create "copies" of the gradient
+	//...add color stops
+	
+<span class="fragment" data-fragment-index="3">//Animate "x1" between 0% and 100%
+linearGradient.append("animate")
+	.attr("attributeName","x1")
+	.attr("values","0%;100%")
+	.attr("dur","7s")
+	.attr("repeatCount","indefinite");</span>
+
+<span class="fragment" data-fragment-index="4">//Animate "x2" between 100% and 200%
+linearGradient.append("animate")
+	.attr("attributeName","x2")
+	.attr("values","100%;200%")
+	//...set other attributes same as x1</span>
+</code></pre>
+
+<span class="fragment fade-in" data-fragment-index="1"><img class="spreadImage fragment fade-out" data-fragment-index="2" src="slides/slide_41/explanation-spreadMethod.png"/></span>
+
+</section>

@@ -226,9 +226,9 @@ pt.animalSpeeds.fuzzyInPlace = function() {
 		d3.selectAll("#animalSpeeds  .blurValues")
 			.transition("fuzzyIn").duration(dur*0.4)
 			.delay(function(d,i) { return (i+1)*del + 200; })
-			.attrTween("stdDeviation", function(d) { return d3.interpolateString("0 0", d.maxValue+" 0"); })
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString("0.1 0", d.maxValue+" 0"); })
 			.transition("fuzzyOut").duration(dur*0.2)
-			.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0 0"); });
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0.1 0"); });
 
 		//Move back in
 		d3.selectAll("#animalSpeeds .animalCircle")
@@ -254,9 +254,9 @@ pt.animalSpeeds.fuzzyInPlace = function() {
 		d3.selectAll("#animalSpeeds  .blurValues")
 			.transition("fuzzyIn").duration(dur*0.4)
 			.delay(function(d,i) { return i*del + 200; })
-			.attrTween("stdDeviation", function(d) { return d3.interpolateString("0 0", d.maxValue+" 0"); })
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString("0.1 0", d.maxValue+" 0"); })
 			.transition("fuzzyOut").duration(dur*0.3)
-			.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0 0"); });
+			.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0.1 0"); });
 			
 	}//onlyChangeFuzzy
 	
@@ -303,10 +303,10 @@ pt.animalSpeeds.flyOut = function(direction) {
 		.delay(200)
 		.attrTween("stdDeviation", function(d) { 
 			d.maxValue = d.speed * 12 / pt.animalSpeeds.maxSpeed;
-			return d3.interpolateString("0 0", d.maxValue+" 0"); 
+			return d3.interpolateString("0.1 0", d.maxValue+" 0"); 
 		})
 		.transition("fuzzyOut").duration(dur*0.3)
-		.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0 0"); });
+		.attrTween("stdDeviation", function(d) { return d3.interpolateString(d.maxValue+" 0", "0.1 0"); });
    
 	//Move the circles outward
 	d3.selectAll("#animalSpeeds .animalCircle")

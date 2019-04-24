@@ -69,13 +69,18 @@ pt.slideIdToFunctions = {
       pt.legendCodeMulti.init();
     },
     '-1': function() {
-      pt.legendCodeMulti.toBlack();
+      pt.legendCodeMulti.showHex();
     },
     0: function() {
-      pt.legendCodeMulti.showHex();
+      pt.legendCodeMulti.toBlack();
     },
     1: function() {
       pt.legendCodeMulti.fillRectMulti();
+    }
+  },
+  'legend-code-multi-short': {
+    'init': function() {
+      pt.legendCodeMultiShort.init();
     }
   },
   'traffic-accidents': {
@@ -178,15 +183,18 @@ pt.slideIdToFunctions = {
       pt.sliderMoveCode.init();
     },
     '-1': function() {
-      pt.sliderMoveCode.hideArrows();
+      pt.sliderMoveCode.showFirstGrey();
     },
     0: function() {
-      pt.sliderMoveCode.showArrows();
+      pt.sliderMoveCode.showFirstColored();
     },
     1: function() {
-      pt.sliderMoveCode.showRect();
+      pt.sliderMoveCode.showSecondStop();
     },
     2: function() {
+      pt.sliderMoveCode.showRect();
+    },
+    3: function() {
       pt.sliderMoveCode.hideRect();
     }
   },
@@ -254,6 +262,26 @@ pt.slideIdToFunctions = {
     },
     0: function() {
       pt.stretchedChordFinal.animatedChords();
+    }
+  },
+  'animated-gradient-code': {
+    'init': function() {
+      pt.animatedGradientCode.init();
+    },
+    '-1': function() {
+      pt.animatedGradientCode.noAnimation();
+    },
+    0: function() {
+      pt.animatedGradientCode.hide();
+    },
+    1: function() {
+      pt.animatedGradientCode.noAnimation();
+    },
+    2: function() {
+      pt.animatedGradientCode.animationX1();
+    },
+    3: function() {
+      pt.animatedGradientCode.animationX2();
     }
   },
   'minard': {
@@ -401,7 +429,41 @@ pt.slideIdToFunctions = {
   'colorAdd-blend-modes': {
     'init': function() {
       pt.colorAddBlendModes.init();
+    },
+    0: function() {
+      pt.colorAddBlendModes.isolate();
+    },
+    1: function() {
+      pt.colorAddBlendModes.noIsolateWhite();
+    },
+    2: function() {
+      pt.colorAddBlendModes.noIsolateBlack();
+    },
+    3: function() {
+      pt.colorAddBlendModes.isolate();
     }
+  },
+  'city-temperatures': {
+    'init': function() {
+      pt.cityTemperatures.init();
+    },
+    '-1': function() {
+      pt.cityTemperatures.noBlendMode();
+    },
+    0: function() {
+      pt.cityTemperatures.withBlendMode();
+    },
+  },
+  'slopegraph-animals': {
+    'init': function() {
+      pt.slopeGraphAnimals.init();
+    },
+    '-1': function() {
+      pt.slopeGraphAnimals.noBlendMode();
+    },
+    0: function() {
+      pt.slopeGraphAnimals.withBlendMode();
+    },
   },
   'colorAdd-code': {
     'init': function() {
@@ -444,8 +506,9 @@ function removeSVGs() {
   d3.select('#intro-gradient #introGradient svg').remove();
   d3.select('#traffic-accidents #trafficAccidents svg').remove();
   d3.select("#legend-code-orientation #legendCodeOrientation svg").remove();
-  d3.select('#legend-code-two #legendCodeTwo svg').remove();
-  d3.select('#legend-code-multi #legendCodeMulti svg').remove();
+  //d3.select('#legend-code-two #legendCodeTwo svg').remove();
+  //d3.select('#legend-code-multi #legendCodeMulti svg').remove();
+  //d3.select('#legend-code-multi-short #legendCodeMultiShort svg').remove();
   d3.select('#smooth-legend-SOM #SOMchart svg').remove();
   d3.select('#weather-radial #weatherRadial svg').remove();
 
@@ -467,6 +530,7 @@ function removeSVGs() {
   d3.select('#sankey-example #sankey svg').remove();
   d3.select('#stretched-chord #stretchedChord svg').remove();
   d3.select('#stretched-chord-final #stretchedChordFinal svg').remove();
+  d3.select("#animated-gradient-code #animatedGradientCode svg").remove();
   d3.select("#minard #svgMinard defs").remove();
 
   d3.select("#intro-gooey #introGooey svg").remove();
@@ -487,6 +551,8 @@ function removeSVGs() {
 
   d3.select("#intro-colorAdd #introColorAdd svg").remove();
   d3.select('#colorAdd-blend-modes #colorAddBlendModes svg').remove();
+  d3.select('#city-temperatures #cityTemperatures svg').remove();
+  d3.select('#slopegraph-animals #slopeGraphAnimals svg').remove();
   d3.select('#colorAdd-code #colorAddCode svg').remove();
   clearInterval(pt.colorAddCode.infinityLoop);
 

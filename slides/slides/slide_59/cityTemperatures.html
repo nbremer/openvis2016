@@ -1,0 +1,73 @@
+<style>
+	#cityTemperatures .axis path,
+	#cityTemperatures .axis line {
+	  fill: none;
+	  stroke: #cacaca;
+	  shape-rendering: crispEdges;
+	}
+
+  	#cityTemperatures .title {
+    	font-size: 36px;
+    	fill: #4F4F4F;
+    	font-weight: 300;
+    	text-anchor: middle;
+  	}
+
+  	#cityTemperatures .subtitle {
+    	font-size: 22px;
+    	fill: #b9b9b9;
+    	font-weight: 300;
+    	text-anchor: middle;
+  	}
+
+	#cityTemperatures { 
+		isolation: isolate; 
+		font-size: 16px;
+	}
+	  
+	#cityTemperatures .x.axis path {
+		fill: none;
+	}
+
+	#cityTemperatures .x.axis text {
+		fill: #a0a0a0;
+	}
+
+	#cityTemperatures .y.axis text {
+		fill: #a0a0a0;
+    	font-weight: 300;
+    	font-size: 14px;
+	}
+
+	#cityTemperatures .axisLabel {
+		font-size: 18px;
+	}
+	  
+	#cityTemperatures .line {
+	  fill: none;
+	  stroke-linecap: round;
+	  stroke-width: 3px;
+	}
+
+	#cityTemperatures .zero-line {
+		fill: none;
+		stroke-width: 2px;
+    	stroke: #cbcbcb;
+    	stroke-dasharray: 8,6;
+	}
+
+	#city-temperatures .credit {
+	    font-size: 16px;
+	    color: #C6C6C6;
+	    font-weight: 400;
+	  }
+</style>
+
+<section id="city-temperatures" data-background="#FFFFFF">
+	<div id="cityTemperatures"></div>
+
+	<span class="credit">data from wunderground.com</span>
+
+	<span class="fragment"></span>
+</section>
+

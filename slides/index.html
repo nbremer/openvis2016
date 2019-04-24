@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>SVG beyond mere shapes - OpenVis talk</title>
+		<title>SVGs beyond mere shapes</title>
 
-		<meta name="description" content="SVG beyond mere shapes">
+		<meta name="description" content="SVGs beyond mere shapes">
 		<meta name="author" content="Nadieh Bremer">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -68,6 +68,7 @@
 				<section data-external="slides/slide_21/legendCodeOrientation.html"></section>
 				<section data-external="slides/slide_18/legendCodeTwo.html"></section>
 				<section data-external="slides/slide_19/legendCodeMulti.html"></section>
+				<section data-external="slides/slide_20/legendCodeMultiShort.html"></section>
 				<section data-external="slides/slide_03/smoothLegend.html"></section>
 				<section data-external="slides/slide_23/weatherRadial.html"></section>
 
@@ -94,6 +95,7 @@
 				<section data-external="slides/slide_57/sankeyExample.html"></section>
 				<section data-external="slides/slide_38/stretchedChord.html"></section>
 				<section data-external="slides/slide_39/stretchedChordFinal.html"></section>
+				<section data-external="slides/slide_41/animatedGradientCode.html"></section>
 				<section data-external="slides/slide_55/minard.html"></section>
 
 				<!-- SVG filters -->
@@ -120,6 +122,8 @@
 				<!-- CSS color addition effect -->
 				<section data-external="slides/slide_07/colorAddIntro.html"></section>
 				<section data-external="slides/slide_37/colorAddBlendModes.html"></section>
+				<section data-external="slides/slide_59/cityTemperatures.html"></section>
+				<section data-external="slides/slide_60/slopegraphAnimals.html"></section>
 				<section data-external="slides/slide_36/colorAddCode.html"></section>
 
 				<!-- End Slide -->
@@ -141,12 +145,12 @@
 		<!-- UNDERSCORE -->
 		<script src="js/underscore.js"></script>
 
-		<!-- D3 -->
+        <!-- D3 -->
+		<script src="js/d3.v5.min.js"></script>
+		<script> const d5 = d3; </script>
 		<script src="js/d3.min.js"></script>
 		<script src="js/d3.hexbin.v0.min.js"></script>
 		<!-- <script src="http://d3js.org/topojson.v0.min.js"></script> -->
-		<!-- <script type="text/javascript" src="http://d3js.org/d3.v3.js"></script> -->
-		<!-- <script type="text/javascript" src="http://d3js.org/d3.hexbin.v0.min.js"></script> -->
 
 		<!-- REVEAL TO D3 -->
 		 <script src="js/reveal-to-d3-config.js"></script>
@@ -157,29 +161,36 @@
 		<!-- Some helper functions that are used by several D3 scripts -->
 		<script src="js/helperFunctions.js"></script>
 
+		<!-- Introduction -->
 		<script src="slides/slide_01/titleSlide.js"></script>
 
+		<!-- SVG Gradients -->
+		<!-- Linear Gradients -->
 		<script src="slides/slide_04/gradientIntro.js"></script>
 		<script src="slides/slide_03/smoothLegend.js"></script>
 		<script src="slides/slide_21/legendCodeOrientation.js"></script>
 		<script src="slides/slide_18/legendCodeTwo.js"></script>
 		<script src="slides/slide_19/legendCodeMulti.js"></script>
+		<script src="slides/slide_20/legendCodeMultiShort.js"></script>
 		<script src="slides/slide_22/trafficAccidents.js"></script>
 		<script src="slides/slide_22/accidents.js"></script>
-		<script src="slides/slide_23/weatherBoston.js"></script>
+		<script src="slides/slide_23/weatherNewYork.js"></script>
 		<script src="slides/slide_23/weatherRadial.js"></script>
 
+		<!-- Data based Gradients - Color -->
 		<script src="slides/slide_05/planetsIntro.js"></script>
 		<script src="slides/slide_05/exoplanets.js"></script>
 		<script src="slides/slide_16/planetsCode.js"></script>
 		<script src="slides/slide_17/starsHRDiagram.js"></script>
 		<script src="slides/slide_17/starsSample.js"></script>
 
+		<!-- Data based Gradients - Orientation -->
 		<script src="slides/slide_08/orientationIntro.js"></script>
 		<script src="slides/slide_10/orientationGrey.js"></script>
 		<script src="slides/slide_14/orientationColorHex.js"></script>
 		<script src="slides/slide_09/orientationFinal.js"></script>
 
+		<!-- Focus + Context slider Gradient -->
 		<script src="slides/slide_24/girl_names_us.js"></script>
 		<script src="slides/slide_25/sliderIntro.js"></script>
 		<script src="slides/slide_24/babyNamesFinal.js"></script>
@@ -187,22 +198,28 @@
 		<script src="slides/slide_56/bmi.js"></script>
 		<script src="slides/slide_56/growthBMI.js"></script>
 
+		<!-- Animated Gradient -->
 		<script src="slides/slide_40/animatedGradientIntro.js"></script>
 		<script src="slides/slide_57/sankey.js"></script>
 		<script src="slides/slide_57/sankeyExample.js"></script>
 		<script src="slides/slide_38/stretchedChord.js"></script>
 		<script src="slides/slide_39/stretchedChordFinal.js"></script>
+		<script src="slides/slide_41/animatedGradientCode.js"></script>
 		<script src="slides/slide_55/minard.js"></script>
 
+		<!-- SVG filters -->
+		<!-- SVG Glow effect -->
 		<script src="slides/slide_32/glowIntro.js"></script>
 		<script src="slides/slide_33/radarChart.js"></script>
 		<script src="slides/slide_35/glowCode.js"></script>
 		<script src="slides/slide_34/spiroGraph.js"></script>
 
+		<!-- SVG Fuzzy / Motion blur effect -->
 		<script src="slides/slide_44/fuzzyIntro.js"></script>
 		<script src="slides/slide_42/fuzzyCode.js"></script>
 		<script src="slides/slide_43/animalSpeeds.js"></script>
 
+		<!-- SVG Gooey effect -->
 		<script src="slides/slide_06/gooeyIntro.js"></script>
 		<script src="slides/slide_30/gooeyGolf.js"></script>
 		<script src="slides/slide_31/gooeyCode.js"></script>
@@ -211,10 +228,14 @@
 		<script src="slides/slide_29/biggestCities.js"></script>
 		<script src="slides/slide_28/collisionDetection.js"></script>
 		
+		<!-- CSS color addition effect -->
 		<script src="slides/slide_07/colorAddIntro.js"></script>
 		<script src="slides/slide_37/colorAddBlendModes.js"></script>
+		<script src="slides/slide_59/cityTemperatures.js"></script>
+		<script src="slides/slide_60/slopegraphAnimals.js"></script>
 		<script src="slides/slide_36/colorAddCode.js"></script>
 
+		<!-- End Slide -->
 		<script src="slides/slide_49/endSlide.js"></script>
 
 		<!-- REVEAL INIT -->
@@ -249,13 +270,6 @@
 					{ src: 'plugin/notes/notes.js', async: true }
 				]
 			});
-
-			//Remove the very heavy title slide (& slightly heavy end slide)
-			//by slides before and after that have no JS scripts running by themselves
-			Reveal.addEventListener( 'removeSVGs', function() {
-		    	d3.select('#title-slide #titleSlide svg').remove();
-		    	d3.select('#end-slide #endSlide svg').remove();
-			} );
 
 		</script>
 
