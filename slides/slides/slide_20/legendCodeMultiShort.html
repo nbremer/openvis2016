@@ -5,13 +5,13 @@
 	<div id="legendCodeMultiShort"></div>
 
 <pre><code class="language-javascript" data-noescape data-trim>
-var colors = ["#2c7bb6", "#00a6ca","#00ccbc","#90eb9d","#ffff8c","#f9d057","#f29e2e","#e76818","#d7191c"];
+const colors = ["#2c7bb6", "#00a6ca","#00ccbc","#90eb9d","#ffff8c","#f9d057","#f29e2e","#e76818","#d7191c"]
 
 linearGradient.selectAll("stop") 
     .data( colors )                  
     .enter().append("stop")
     .attr("offset", (d,i) => i/(colors.length-1) )   
-    .attr("stop-color", d => d);
+    .attr("stop-color", d => d)
 
 
 
@@ -23,6 +23,6 @@ linearGradient.selectAll("stop")
 
 //Select the rectangle and fill with gradient
 d3.select("#legend-rectangle")
-    .style("fill", "url(#linear-gradient)");
+    .style("fill", "url(#linear-gradient)")
 </code></pre>
 </section>

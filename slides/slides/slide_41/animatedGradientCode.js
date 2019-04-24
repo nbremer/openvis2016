@@ -88,8 +88,6 @@ pt.animatedGradientCode.noAnimation = function() {
 }//noAnimation
 
 pt.animatedGradientCode.hide = function() {
-
-    console.log("hide")
 	//Hide the rect
 	d3.selectAll("#animatedGradientCode .animatedRect")
 		.transition().duration(500)

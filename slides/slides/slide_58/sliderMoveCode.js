@@ -167,11 +167,11 @@ pt.sliderMoveCode.update = function() {
 
 		//Update the text in the code block
 		d3.selectAll("#slider-move-code pre code")
-			.html('.on("brush", function(d) { <br><br>' + 
+			.html('.on("brush", d => { <br><br>' + 
 				'	/*Update the left gradient "border"*/ <br>' +
-			 	'	d3.selectAll(".left").attr("offset", "' + Math.round(startOffset) + '%");<br><br>' +
+			 	'	d3.selectAll(".left").attr("offset", "' + Math.round(startOffset) + '%")<br><br>' +
 			 	'	/*Update the right gradient "border"*/ <br>' + 
-			 	'	d3.selectAll(".right").attr("offset", "' + Math.round(endOffset) + '%");<br><br>' +
+			 	'	d3.selectAll(".right").attr("offset", "' + Math.round(endOffset) + '%")<br><br>' +
 			 	'  	/*...do other things...*/<br>' +
 				'})')
 		//Update the code to its javascript highlight

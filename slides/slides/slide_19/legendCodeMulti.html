@@ -19,10 +19,10 @@ linearGradient<span class="fragment" data-fragment-index="1">.selectAll("stop")
       ])                  
     .enter().append("stop")</span>
     <span class="fragment" data-fragment-index="2">.attr("offset", d => d.offset )   
-    .attr("stop-color", d => d.color );</span>
+    .attr("stop-color", d => d.color )</span>
 
 //Select the rectangle and fill with gradient
 d3.select("#legend-rectangle")
-    .style("fill", "url(#linear-gradient)");
+    .style("fill", "url(#linear-gradient)")
 </code></pre>
 </section>

@@ -32,13 +32,13 @@
   <div id="sliderMoveCode"></div>
 
   <span class="fragment" data-fragment-index="4"><pre><code class="language-javascript" data-noescape data-trim>
-.on("brush", function(d) {
+.on("brush", d => {
 
   /*Update the left "border"*/
-  d3.selectAll(".left").attr("offset", "40%");
+  d3.selectAll(".left").attr("offset", "40%")
 
   /*Update the right "border"*/
-  d3.selectAll(".right").attr("offset", "60%");
+  d3.selectAll(".right").attr("offset", "60%")
 
   /*...do other things...*/
 })

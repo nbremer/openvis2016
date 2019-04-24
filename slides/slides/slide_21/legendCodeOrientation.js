@@ -222,9 +222,9 @@ pt.legendCodeOrientation.toBlack = function() {
 		.style("opacity", 0);
 
 	d3.selectAll("#legend-code-orientation pre code")
-		.html('var defs = svg.append("defs");<br><br>' + 
-			'var linearGradient = defs.append("linearGradient")<br>' + 
-    		'    .attr("id", "linear-gradient");<br><br><br><br><br><br><br><br>');
+		.html('const defs = svg.append("defs")<br><br>' + 
+			'const linearGradient = defs.append("linearGradient")<br>' + 
+    		'    .attr("id", "linear-gradient")<br><br><br><br><br><br><br><br>');
 	//Update the code to its javascript highlight
 	$("#legend-code-orientation pre code").each(function(i, block) {
 	   hljs.highlightBlock(block);
@@ -419,15 +419,15 @@ pt.legendCodeOrientation.pullIn = function() {
 pt.legendCodeOrientation.updateCode = function(direction, x2, y2, x1, y1) {
 	//Update the text in the code block
 	d3.selectAll("#legend-code-orientation pre code")
-		.html('var defs = svg.append("defs");<br><br>' + 
-			'var linearGradient = defs.append("linearGradient")<br>' + 
-    		'    .attr("id", "linear-gradient");<br><br>' + 
+		.html('const defs = svg.append("defs")<br><br>' + 
+			'const linearGradient = defs.append("linearGradient")<br>' + 
+    		'    .attr("id", "linear-gradient")<br><br>' + 
     		'/*' + direction + ' gradient*/<br>' +
 			'linearGradient <br>' + 
     		'    .attr("x1", "' + (x1 || '0%') + '") <br>' +
     		'    .attr("y1", "' + (y1 || '0%') + '") <br>' +
     		'    .attr("x2", "' + x2 + '") <br>' +
-    		'    .attr("y2", "' + y2 + '");');
+    		'    .attr("y2", "' + y2 + '")');
 	//Update the code to its javascript highlight
 	$("#legend-code-orientation pre code").each(function(i, block) {
 	   hljs.highlightBlock(block);
